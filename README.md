@@ -26,13 +26,13 @@ significant differences with the previous versions of Stage and the
 previous edition of this manual is now out of date. 
 
 # TABLE OF CONTENTS
-1. [Introduction](docs/INTRO.md)
-2. [The Basics](docs/BASICS.md)
-3. [Building a World](docs/WORLDFILES.md)
-4. [Writing a Configuration (.cfg) File](docs/CFGFILES.md)
-5. [Getting Your Simulation to Run Your Code (CPP)](docs/CONTROLLERS.md)
-5. [Getting Your Simulation to Run Your Code (C)](docs/CONTROLLER_C.md)
-5. [Getting Your Simulation to Run Your Code (Py)](docs/CONTROLLER_PY.md)
+1. [Introduction](INTRO.md)
+2. [The Basics](BASICS.md)
+3. [Building a World](WORLDFILES.md)
+4. [Writing a Configuration (.cfg) File](CFGFILES.md)
+5. [Getting Your Simulation to Run Your Code (CPP)](CONTROLLERS.md)
+5. [Getting Your Simulation to Run Your Code (C)](CONTROLLER_C.md)
+5. [Getting Your Simulation to Run Your Code (Py)](CONTROLLER_PY.md)
 
 ### Change Log
 * 17 June 2015 considering where to publish
