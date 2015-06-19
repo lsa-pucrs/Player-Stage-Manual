@@ -10,10 +10,18 @@ correct folder type the following command to run the "simple world" that comes w
 Assuming Player/Stage is installed properly you should now have a window
 open which looks like Figure 1.
 
+First Header | Second Header | Third Header
+:----------- | :-----------: | -----------:
+Left         | Center        | Right
+Left         | Center        | Right
+
+
+
+
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/empty_world/finalEmptyWorld.png" width="50%">     |
+| ![Figure 1](pics/empty_world/finalEmptyWorld.png "Figure 1") |
 | Figure 1: The `simple.cfg` world after being run | 
 
 Congratulations, you can now build Player/Stage simulations! 
