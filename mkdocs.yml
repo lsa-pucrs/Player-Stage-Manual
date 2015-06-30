@@ -1,15 +1,18 @@
-site_name: Player-Stage Manual
+site_name: How to use Player/Stage
 repo_url: https://github.com/NickelsLab/Player-Stage-Manual
+theme: readthedocs
 
 pages:
 - Home: index.md
-- The Basics: BASICS.md
-- Introduction: INTRO.md
-- Building a World: WORLDFILES.md
-- Writing a Configuration (.cfg) File: CFGFILES.md
-- Controllers (C++): CONTROLLERS.md
-- Controllers (C): CONTROLLER_C.md
-- Controllers (Python/playercpp): CONTROLLER_PY.md
+- Ch1 - Introduction: INTRO.md
+- Ch2 - The Basics: BASICS.md
+- Ch3 - Building a World: WORLDFILES.md
+- Ch4 - Writing a Configuration (.cfg) File: CFGFILES.md
+- Ch5 - Controllers (C++): CONTROLLERS.md
+- Ch6 - Controllers (C): CONTROLLER_C.md
+- Ch7 - Controllers (Python/playercpp): CONTROLLER_PY.md
+- writing-your-docs.md
 
 markdown_extensions:
 - toc:
+    permalink: True

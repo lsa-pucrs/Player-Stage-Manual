@@ -1,4 +1,6 @@
-# <a name="sec_Coding"> Chapter 5 - Getting Your Simulation to Run Your Code</a>
+<!---
+# Chapter 5 - Getting Your Simulation to Run Your Code</a>
+--->
 
 To learn how to write code for Player or Player/Stage it helps to
 understand the basic structure of how Player works. Player uses a
@@ -27,7 +29,7 @@ actually call these functions with your code and know how to use them.
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/ServerClient_robot.png" width="50%">     |
+| ![Figure 5.1](pics/coding/ServerClient_robot.png) |
 | Figure 5.1: The server/client control structure of Player when used on a robot. There may be several proxies connected to the server at any time. |
 <!--- <a name="fig_Coding_ServerClientSim"></a> --->
 
@@ -35,7 +37,7 @@ actually call these functions with your code and know how to use them.
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/ServerClient_sim.png" width="50%">     |
+| ![Figure 5.2](pics/coding/ServerClient_sim.png) |
 | Figure 5.2: The server/client control structure of Player/Stage when used as a simulator. There may be several proxies connected to the server at any time. |
 
 ## 5.1 Types of controllers
@@ -226,7 +228,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-## 5.3 <a name="sec_Coding_InteractingWithProxies"> Interacting with Proxies </a>
+## 5.3 Interacting with Proxies
 
 As you may expect, each proxy is specialised towards controlling the device
 it connects to. This means that each proxy will have different commands
@@ -262,7 +264,7 @@ differential or car-like drives.
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/bob_cartgrid.png" width="50%">     |
+| ![Figure 5.3](pics/coding/bob_cartgrid.png) |
 | Figure 5.3: A robot on a cartesian grid. This shows what directions the X and Y speeds will cause the robot to move in. A positive yaw speed will turn the robot in the direction of the + arrow, a negative yaw speed is the direction of the - arrow. |
 
 
@@ -315,7 +317,7 @@ starting point, and yaws are relative to its starting yaw.
 
 >`> ./bigbob8`
 
-In [The Position Model](WORLDFILES.md#sec_BuildingAWorld_BuildingRobot_RobotSensors_Position), we
+In [The Position Model](WORLDFILES.md#321-sensors-and-devices), we
 specified whether player would record odometry by measuring how much the
 robot's wheels have turned, or whether the robot would have perfect
 knowledge of its current coordinates (by default the robot does not record
@@ -379,7 +381,7 @@ Angles are given with reference to the laser's centre front (see Figure
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/laserscanner2.png" width="50%">     |
+| ![Figure 5.4](pics/coding/laserscanner2.png) |
 | Figure 5.4: How laser angles are referenced. In this diagram the laser is pointing to the right along the dotted line, the angle &theta; is the angle of a laser scan point, in this example &theta; is negative. |
 
 
@@ -387,7 +389,7 @@ Angles are given with reference to the laser's centre front (see Figure
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/laserscanner.png" width="50%">     |
+| ![Figure 5.5](pics/coding/laserscanner.png) |
 | Figure 5.5: A laser scanner. The minimum angle is the angle of the rightmost laser scan, the maximum angle is the leftmost laser scan.  &theta; is the scan resolution of the laser, it is the angle between each laser scan, given in radians. |
 <!--- <a name="fig_Coding_InteractingWithProxies_Laser_Proxy" </a> --->
 
@@ -446,7 +448,7 @@ manual](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/structplayer_
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/blobfinder_image.png" width="50%">     |
+| ![Figure 5.6](pics/coding/blobfinder_image.png) |
 | Figure 5.6: What the fields in `playerc_blobfinder_blob_t` mean. The blob on the left has a geometric centre at *(x,y)*, the blob on the right has a bounding box with the top left corner at *(left, top)* pixels, and a lower right coordinate at *(right, bottom)* pixels. Coordinates are given with reference to the top left corner of the image. |
 <!--- <a name="fig_Coding_InteractingWithProxies_Blobfinder_BlobImage" </a> ---> 
 
@@ -537,7 +539,7 @@ To change a property of an item in the simulation we use the following function:
 
 * `item_name`: this is the name that you gave to the object in the
   worldfile, it could be *any* model that you have described in the
-  worldfile. For example, in [This Example](WORLDFILES.md#sec_BuildingAWorld_BuildingRobot_ExampleRobot) in the
+  worldfile. For example, in [This Example](WORLDFILES.md#322-an-example-robot) in the
   worldfile we declared a Bigbob type robot which we called
   "bob1" so the `item_name` for that object is "bob1". Similarly
   in [Other Stuff](WORLDFILES.md#sec_BuildingAWorld_OtherStuff) we built some
@@ -615,7 +617,7 @@ transitions shown in Figure 5.7.
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/arch_structureOA.png" width="50%">     |
+| ![Figure 5.7](pics/coding/arch_structureOA.png) |
 | Figure 5.7: The state transitions that the Bigbob rubbish collecting robot will follow. |
 <!--- <a name="fig_Coding_UsingProxiesExample_ControlArch_Structure" </a> --->
 
@@ -984,7 +986,7 @@ example.)
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/bigbob_radius.png" width="50%">     |
+| ![Figure 5.8](pics/coding/bigbob_radius.png) |
 | Figure 5.8: Where to look for items which may have passed through Bigbob's laser. |
 <!--- <a name="fig_Coding_UsingProxiesExample_CollectItem_BigbobLaserRadius" </a> --->
 
@@ -1124,6 +1126,3 @@ The main advantage of configuring the robot swarm this way is that it
 allows us to only have one simulation proxy which is used by all robots.
 This is good since there is only ever one simulation window that you can
 interact with and so multiple simulation proxies are unnecessary.
-
-* Up: [README](README.md)
-* Prev: [Writing a Configuration (.cfg) File](CFGFILES.md)

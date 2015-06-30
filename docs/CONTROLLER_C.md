@@ -1,4 +1,6 @@
+<!---
 # <a name="sec_Coding"> Chapter 6 - Controllers in Other Languages </a>
+--->
 
 In [Chapter 5](CONTROLLERS.md) only C++ was used as an example.  Since
 Player interacts with controlling code over network sockets, it's pretty
@@ -219,8 +221,9 @@ last for car-like drives.
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/bob_cartgrid.png" width="50%">     |
+| ![Figure 6.3](pics/coding/bob_cartgrid.png) |
 | Figure 6.3: A robot on a cartesian grid. This shows what directions the X and Y speeds will cause the robot to move in. A positive yaw speed will turn the robot in the direction of the + arrow, a negative yaw speed is the direction of the - arrow. |
+
 
 Figure 6.3 
 shows which direction the x, y and yaw speeds are in relation to the robot.
@@ -336,7 +339,7 @@ Angles are given with reference to the laser's centre front (see Figure
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/laserscanner2.png" width="50%">     |
+| ![Figure 6.4](pics/coding/laserscanner2.png) |
 | Figure 6.4: How laser angles are referenced. In this diagram the laser is pointing to the right along the dotted line, the angle &theta; is the angle of a laser scan point, in this example &theta; is negative. |
 
 
@@ -344,9 +347,11 @@ Angles are given with reference to the laser's centre front (see Figure
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/laserscanner.png" width="50%">     |
+| ![Figure 6.5](pics/coding/laserscanner.png) |
 | Figure 6.5: A laser scanner. The minimum angle is the angle of the rightmost laser scan, the maximum angle is the leftmost laser scan.  &theta; is the scan resolution of the laser, it is the angle between each laser scan, given in radians. |
 <!--- <a name="fig_Coding_InteractingWithProxies_Laser_Proxy" </a> --->
+
+
 
 
 > #### TRY IT OUT
@@ -401,11 +406,10 @@ need. The `playerc_blobfinder_blob_t` structure contains the following fields:
 * `bottom`: The vertical coordinate of the bottom side of the
   blob's bounding box (see Figure 6.6).
 
-
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/blobfinder_image.png" width="50%">     |
+| ![Figure 6.6](pics/coding/blobfinder_image.png) |
 | Figure 6.6: What the fields in `playerc_blobfinder_blob_t` mean. The blob on the left has a geometric centre at *(x,y)*, the blob on the right has a bounding box with the top left corner at *(left, top)* pixels, and a lower right coordinate at *(right, bottom)* pixels. Coordinates are given with reference to the top left corner of the image. |
 <!--- <a name="fig_Coding_InteractingWithProxies_Blobfinder_BlobImage" </a> ---> 
 
@@ -609,10 +613,9 @@ transitions shown in Figure 6.7.
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/arch_structureOA.png" width="50%">     |
+| ![Figure 6.7](pics/coding/arch_structureOA.png) |
 | Figure 6.7: The state transitions that the Bigbob rubbish collecting robot will follow. |
 <!--- <a name="fig_Coding_UsingProxiesExample_ControlArch_Structure" </a> --->
-
 
 ### 6.5.2 <a name="sec_Coding_UsingProxiesExample_BeginningCode"> Beginning the Code </a>
 
@@ -978,7 +981,7 @@ example.)
 <!--- Figure --->
 | |
 | :---------------:| 
-| <img src="pics/coding/bigbob_radius.png" width="50%">     |
+| ![Figure 6.8](pics/coding/bigbob_radius.png) |
 | Figure 6.8: Where to look for items which may have passed through Bigbob's laser. |
 <!--- <a name="fig_Coding_UsingProxiesExample_CollectItem_BigbobLaserRadius" </a> --->
 
@@ -1117,6 +1120,3 @@ The main advantage of configuring the robot swarm this way is that it
 allows us to only have one simulation proxy which is used by all robots.
 This is good since there is only ever one simulation window that you can
 interact with and so multiple simulation proxies are unnecessary.
-
-* Up: [README](README.md)
-* Prev: [Writing a Configuration (.cfg) File](CFGFILES.md)

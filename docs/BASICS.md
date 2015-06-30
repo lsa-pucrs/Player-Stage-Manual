@@ -1,4 +1,6 @@
+<!---
 # Chapter 2 - The Basics
+--->
 
 ## 2.1 - Important File Types
 
@@ -78,8 +80,5 @@ All this line does is tell Player which port to listen to and what kind of data 
 You could just as easily connect to another computer by using its IP
 address instead of ``localhost''. The specifics of writing a device
 address in this way will be described in 
-Section [ConfigurationFile](CFGFILES.md)
+[Chapter 4](CFGFILES.md)
 
-* Up: [README](README.md)
-* Prev: [Introduction](INTRO.md)
-* Next: [Building a World](WORLDFILES.md)

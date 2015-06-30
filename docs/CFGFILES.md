@@ -1,14 +1,16 @@
-# Chapter 4 - <a name="sec_ConfigurationFile"> Writing a Configuration (.cfg) File</a>
+<!---
+# Chapter 4 - Writing a Configuration (.cfg) File
+--->
 
 As mentioned earlier, Player is a hardware abstraction layer which connects
 your code to the robot's hardware. It does this by acting as a
 Server/Client type program where your code and the robot's sensors are
 clients to a Player server which then passes the data and instructions
 around to where it all needs to go. This stuff will be properly explained
-in [Coding](CONTROLLERS.md#sec_Coding), it all sounds more complicated than
-it is because Player/Stage takes care of all the difficult stuff. The
-configuration file is needed in order to tell the Player server which
-drivers to use and which interfaces the drivers will be using.
+in [Chapter 5 - Controllers](CONTROLLERS.md), it all sounds more
+complicated than it is because Player/Stage takes care of all the difficult
+stuff. The configuration file is needed in order to tell the Player server
+which drivers to use and which interfaces the drivers will be using.
 
 For each model in the simulation or device on the robot that you want to interact with, you will need to specify a driver. This is far easier than writing worldfile information, and follows the same general syntax. The driver specification is in the form:
 ```
@@ -35,18 +37,19 @@ here that you tell Player what interface to use in order to interpret
 information given out by the driver (often this is sensor information from
 a robot), any information that a driver 'provides' can be used by your
 code. For a Stage simulated robot the `"stage"` driver can provide the
-interfaces to the sensors discussed in [Robot Sensors](WORLDFILES.md#sec_BuildingAWorld_BuildingRobot_RobotSensors).  Each interface shares
+interfaces to the sensors discussed in [Section 3.2.1 - Sensors and Devices](WORLDFILES.md#321-sensors-and-devices)
+Each interface shares
 the same name as the sensor model, so for example a `ranger` model would
 use the `ranger` interface to interact with Player and so on (the only
 exception to this being the `position` model which uses the `position2d`
 interface). 
 The Player manual contains [a list of all the different interfaces that can be
 used](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html),
-the most useful ones have already been mentioned in [Robot Sensors](WORLDFILES.md#sec_BuildingAWorld_BuildingRobot_RobotSensors), although there are others too numerable to list here.
+the most useful ones have already been mentioned in [Section 3.2.1 - Sensors and Devices](WORLDFILES.md#321-sensors-and-devices), although there are others too numerable to list here.
 
 The input to the 'provides' parameter is a "device address", which
 specifies which TCP port an interface to a robot device can be found,
-[Device Address](#sec_ConfigurationFile_DeviceAddress) has more information
+[Section 4.1 - Device Address](#41-device-addresses) has more information
 about device addresses. This uses the `key:host:robot:interface:index` form
 separated by white space.
 
@@ -62,10 +65,11 @@ is `model`. This is only used if `"stage"` is the driver, it tells Player
 which particular model in the worldfile is providing the interfaces for
 this particular driver. A different driver is needed for each model that
 you want to use.  Models that aren't required to do anything (such as a
-map, or in the example of [Other Stuff](WORLDFILES.md#sec_BuildingAWorld_OtherStuff) oranges and boxes) don't need to have a driver written for them.
+map, or in the example of [Section 3.2.3 - Building Other
+Stuff](WORLDFILES.md#323-building-other-stuff) oranges and boxes) don't need to have a driver written for them.
 
 The remaining driver parameters are 'requires' and 'plugin'. The 'requires'
-is used for drivers that need input information such as `"vfh"', it tells
+is used for drivers that need input information such as 'vfh', it tells
 this driver where to find this information and which interface it uses.
 The 'requires' parameter uses the same `key:host:robot:interface:index`
 syntax as the 'provides' parameter. Finally the `plugin` parameter is used
@@ -92,7 +96,7 @@ use and the code for dealing with this driver can be found in the
 an add-on for Player, for drivers that are built into Player by default the
 `plugin` doesn't need to be specified.
 
-# <a name=sec_ConfigurationFile_DeviceAddress> Device Addresses </a>
+# 4.1 - Device Addresses 
 
 A device address is used to tell Player where the driver you are making
 will present (or receive) information and which interface to use in order
@@ -101,7 +105,7 @@ to read this information. This is a string in the form
 
 * `key`: The [Player manual](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__tutorial__config.html\#device_addresses) states that: *"The purpose of the
 key field is to allow a driver that supports multiple interfaces of the
-same type to map those interfaces onto different devices"* 
+same type to map those interfaces onto different devices"*  
 This is a driver level thing and has a lot to do with the `name` of the
 driver that you are using, generally for `"stage"` the `key` doesn't need
 to be used. If you're using Player without Stage then there is a useful
@@ -125,12 +129,13 @@ then we would specify the address as `"127.0.0.1::ranger:0"`, the robot
 field is empty but the colons around it are still there. You may notice
 that the key field here was left off as before.
 
-# <a name=sec_ConfigurationFile_FinishingCFG> Putting the Configuration File Together </a>
+# 4.2 - Putting the Configuration File Together 
 
 We have examined the commands necessary to build a driver for a model in
 the worldfile, now it is just a case of putting them all together. To
 demonstrate this process we will build a configuration file for the
-worldfile developed in [Building a World](WORLDFILES.md#sec_BuildingAWorld).
+worldfile developed in [Section 3.1.3 - Making a Basic
+Worldfile](WORLDFILES.md#311-making-a-basic-worldfile).
 In this world we want our code to be able to interact with the robot, so in
 our configuration file we need to specify a driver for this robot.
 ```
@@ -176,8 +181,8 @@ cameras) is that we put the first device at index 0 and subsequent devices
 using the same interface have index 1, then 2, then 3 and so on.
 
 There are lots of ranger sensors in our model but when we
-created the robot's sensors in [Sensors and
-Devices](WORLDFILES.md#sec_BuildingAWorld_BuildingRobot_RobotSensorsDevices)
+created the robot's sensors in 
+  [Section 3.2.1 - Robot Sensors and Devices](#321-sensors-and-devices).
 we put them all into two ranger models (one for all the sonars and one for
 the one laser).  So as far as the configuration file is concerned there are
 only two ranging devices, because all the separate sonar sensors are lumped
@@ -266,21 +271,15 @@ driver
 )
 ```
 
-> #### TRY IT OUT
+## 4.3 - TRY IT OUT (driving a robot)
 
-> `> cd <source_code>/Ch4`
+```tiobox
+> cd <source_code>/Ch4
+> player bigbob8.cfg
+> playerv --position2d:0
+> playerv -p 6666 -position2d:0
+```
 
-> `> player bigbob8.cfg` (in one terminal window)
-
-> `> playerv --position2d:0`  (in another terminal window)
-
-> `> playerv -p 6666 -position2d:0}` (in yet another terminal window)
-
-> To drive the robots around, you select Devices/Position2d/Command in a
-  playerv window, then drag the red bulls-eye around.
-
-
-
-* Up: [README](README.md)
-* Prev: [Building a World](WORLDFILES.md)
-* Next: [Getting Your Simulation to Run Your Code](CONTROLLERS.md)
+To drive the robots around, you select Devices/Position2d/Subscribe, then 
+select Devices/Position2d/Command in a playerv window, then drag the red
+bulls-eye around.
