@@ -30,12 +30,13 @@ previous edition of this manual is now out of date.
 2. [The Basics](BASICS.md)
 3. [Building a World](WORLDFILES.md)
 4. [Writing a Configuration (.cfg) File](CFGFILES.md)
-5. [Getting Your Simulation to Run Your Code (CPP)](CONTROLLERS.md)
-5. [Getting Your Simulation to Run Your Code (C)](CONTROLLER_C.md)
-5. [Getting Your Simulation to Run Your Code (Py)](CONTROLLER_PY.md)
+5. [Getting Your Simulation to Run Your Code](CONTROLLERS.md)
+5. [Controllers (C++)](CONTROLLER_CPP.md)
+5. [Controllers (C)](CONTROLLER_C.md)
+5. [Controllers (Py)](CONTROLLER_PY.md)
 
 ### Change Log
-* 17 June 2015 considering where to publish
+* 30 June 2015 updating markdown for readthedocs.org
 * 18 May 2015 began migration from LaTeX to MARKDOWN on GitHub
 * August 2013 updated manual to Stage 4.1.1
 * 1st August 2013 Source code made available online
