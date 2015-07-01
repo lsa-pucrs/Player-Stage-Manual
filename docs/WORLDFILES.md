@@ -1,28 +1,6 @@
-<!---
-# Chapter 3 - Building a World</a>
---->
-
-First we will run a world and configuration file that comes bundled with
-Stage. In your bash shell navigate to the Stage/worlds folder, by default
-(in Linux at least) this is /usr/local/share/stage/worlds. Once in the
-correct folder type the following command to run the "simple world" that comes with Player/Stage:
-
-`player simple.cfg`
-
-Assuming Player/Stage is installed properly you should now have a window
-open which looks like Figure 3.1.
-
-<!--- Figure --->
-| |
-| ---------------| 
-| ![Figure 3.1](pics/empty_world/finalEmptyWorld.png "Figure 1") |
-| Figure 3.1: The `simple.cfg` world after being run | 
-
-Congratulations, you can now build Player/Stage simulations! 
-
 ## 3.1 - Building an Empty World </a>
 
-As you can see above, when we tell Player to build a world we only give it
+When we tell Player to build a world we only give it
 the .cfg file as an input. This .cfg file needs to tell us where to find
 our .world file, which is where all the items in the simulation are
 described. To explain how to build a Stage world containing nothing but
@@ -304,7 +282,7 @@ sufficient for most people's needs. A full list of interfaces that Player
 supports can be found in the [Player
 manual](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html) although only the following are supported by the current distribution of Stage (version 4.1.X). Unless otherwise stated, these models use the Player interface that shares its name:
 
-####camera
+#### 3.2.1.1 - camera
 The [camera model](http://rtv.github.com/Stage/group__model__camera.html)
 adds a camera to the robot model and allows your code to interact with the simulated camera. The camera parameters are as follows:
 
@@ -313,7 +291,7 @@ adds a camera to the robot model and allows your code to interact with the simul
 * `fov [x y]`: the field of view of the camera *in DEGREES*.
 * `pantilt [pan tilt]`: angle, in degrees, where the camera is looking. Pan is the left-right positioning. So for instance pantilt [20 10] points the camera 20 degrees left and 10 degrees down.
 
-####blobfinder
+#### 3.2.1.2 - blobfinder
 [The blobfinder](http://rtv.github.com/Stage/group__model__blobfinder.html)
 simulates colour detection software that can be run on the image from the
 robot's camera. It is not necessary to include a model of the camera in
@@ -347,7 +325,7 @@ the most useful ones are here:
       described in
       [http://playerstage.sourceforge.net/wiki/Writing_configuration_files#Units](http://playerstage.sourceforge.net/wiki/Writing_configuration_files#Units).  By default, the blobfinder `fov` is in DEGREES.
 
-####fiducial 
+#### 3.2.1.3 - fiducial 
 A fiducial is a fixed point in an image, so the [fiducial
 finder](http://rtv.github.com/Stage/group__model__fiducial.html) 
 simulates image processing software that locates fixed points in an image. The fiducialfinder is able to locate objects in the simulation whose `fiducial_return` parameter is set to true. Stage also allows you to specify different types of fiducial using the `fiducial_key` parameter of a model. This means that you can make the robots able to tell the difference between different fiducials by what key they transmit. The fiducial finder and the concept of `fiducial_key`s is properly explained in the Stage manual. The fiducial sensors parameters are:
@@ -360,7 +338,7 @@ away than `range_max_id` then it detects that there is a fiducial but can't iden
 * `fov`: The field of view of the fiducial finder *in DEGREES*.
 
 
-#### ranger sensor
+#### 3.2.1.4 - ranger sensor
 The [ranger sensor](http://rtv.github.com/Stage/group__model__ranger.html)
 simulates any kind of obstacle detection device (e.g. sonars, lasers, or
 infrared sensors). These can locate models whose ` ranger_return` is
@@ -382,7 +360,7 @@ can be sensed.
       view. So if the field of view is 180 and there are 180 samples the
       rangers are 1 apart.
 
-####ranger device
+#### 3.2.1.5 - ranger device
 A [ranger device](http://rtv.github.com/Stage/group__model__ranger.html) is
 comprised of ranger sensors.  A laser is a special case of ranger sensor
 which allows only one sensor, and has a very large field of view.  For a
@@ -394,7 +372,7 @@ yaw]` data is explained in [Yaw Angles](#yaw-angles).
   sensor_name (pose [x2 y2 z2 yaw2])
 ```
 
-####gripper 
+#### 3.2.1.6 - gripper 
 The [gripper model](http://rtv.github.com/Stage/group__model__gripper.html)
 is a simulation of the gripper you get on a Pioneer robot.  The Pioneer
 grippers looks like a big block on the front of the robot with two big
@@ -412,7 +390,7 @@ are:
   [Section 3.2.1 - Robot Sensors and Devices](#321-sensors-and-devices).
 
 
-#### position
+#### 3.2.1.7 - position
 The [position model](http://rtv.github.com/Stage/group__model__position.html)
 simulates the robot's odometry, this is when the robot keeps track of where
 it is by recording how many times its wheels spin and the angle it turns.
@@ -443,7 +421,7 @@ build our own example. First we will describe the physical properties of
 the robot, such as size and shape. Then we will add sensors onto it so that
 it can interact with its environment.
 
-#### The Robot's Body
+#### 3.2.2.1 - The Robot's Body
 Let's say we want to model a rubbish collecting robot called "Bigbob". The
 first thing we need to do is describe its basic shape, to do this you need
 to know your robot's dimensions in metres. Figure 3.6 shows the basic shape
@@ -495,10 +473,10 @@ In this example, you can see the basic shape in an empty environment.
 
 ```tiobox
 > cd <source_code>/Ch3
-> stage bigbob1.world
+> stage bigbob1.world &
 ```
 
-#### Adding Teeth
+#### 3.2.2.2 - Adding Teeth
 
 Now in the same way as we built the body we can add on some
 teeth for Bigbob to collect rubbish between. Figure 3.7 shows
@@ -572,10 +550,10 @@ This example shows the more accurate rendering of Big Bob.
 
 ```tiobox
 > cd <source_code/Ch3
-> stage bigbob2.world
+> stage bigbob2.world &
 ```
 
-#### Yaw Angles
+#### 3.2.2.3 - Yaw Angles
 
 You may have noticed that in Figures 3.6 and 3.7 Bigbob is facing to the right
 of the grid. When you place any item in a Player/Stage simulation they are,
@@ -629,7 +607,7 @@ define bigbob position
 
 ```tiobox
 > cd <source_code>/Ch3
-> stage bigbob3.world
+> stage bigbob3.world &
 ```
 
 Click on the robot, and it should hilight.  You can drag bigbob around with
@@ -637,7 +615,7 @@ the left (primay) mouse button.  Click and hold down the right
 (secondary) mouse button, and move the mouse to rotate bigbob about the
 centre of the body, not the centre of the entire block.
 
-#### Drive
+#### 3.2.2.4 - Drive
 
 Finally we will specify the `drive` of Bigbob, this is a parameter of the `position` model and has been described earlier.
 ```
@@ -660,13 +638,15 @@ define bigbob position
 ```
 
 
-#### The Robot's Sensors
+#### 3.2.2.5 - The Robot's Sensors
 
 Now that Bigbob's body has been built let's move on to the sensors. We will
 put sonar and blobfinding sensors onto Bigbob so that it can detect walls
 and see coloured blobs it can interpret as rubbish to collect. We will also
 put a laser between Bigbob's teeth so that it can detect when an item
 passes in between them.
+
+##### Bigbob's Sonar
 
 We will start with the sonars. The first thing to do is to define a model
 for the sonar sensor that is going to be used on Bigbob:
@@ -742,17 +722,13 @@ This file includes everything described up till now.
 
 ```tiobox
 > cd <source_code>/Ch3 
-> player bigbob4.cfg               (in one terminal window)
-> playerv --ranger:0               (in another terminal window)
+> player bigbob4.cfg &
+> playerv --ranger:0  &
 ```
  
-**Note:**
-From now on, in the examples, player should be started in a different window
-from the other commands given.  For brevity, I won't repeat this in every TRY
-IT OUT section.
-
-This will open two new windows, one containing the simulation and another
-containing a "remote control".  See [the playerv documentation](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__util__playerv.html)
+This will start player in the background, then start a "remote control".
+See [the playerv
+documentation](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__util__playerv.html)
 for details.  For now, the "remote control" just makes the ranger sensor
 cones appear.  
 
@@ -764,7 +740,7 @@ If you move this target, the robot will move.
 --->
 
 
-#### Bigbob's Blobfinder 
+##### Bigbob's Blobfinder 
 
 Now that Bigbob's sonars are done we will attach a blobfinder:
 ```
@@ -813,8 +789,8 @@ the PlayerViewer window.
 
 ```tiobox
 > cd <source_code>/Ch3
-> player bigbob5.cfg
-> playerv --blobfinder:0
+> player bigbob5.cfg &
+> playerv --blobfinder:0 &
 ```
 
 ##### Bigbob's Laser
@@ -961,8 +937,8 @@ This should show you Figure 3.12
 
 ```tiobox
 > cd <source_code>/Ch3
-> player bigbob6.cfg
-> playerv --ranger:0 --ranger:1
+> player bigbob6.cfg &
+> playerv --ranger:0 --ranger:1 &
 ```
 
 ### 3.2.3 - Building Other Stuff 
@@ -1094,8 +1070,8 @@ This should show you Figure 3.15.
 
 ```tiobox
 > cd <source_code>/Ch3
-> player bigbob7.cfg
-> playerv --ranger:0 --ranger:1 --blobfinder:0
+> player bigbob7.cfg &
+> playerv --ranger:0 --ranger:1 --blobfinder:0 &
 ```
 
 The full worldfile is at `<source_code>/Ch3/bigbob7.world`, this includes the
