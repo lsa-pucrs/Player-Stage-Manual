@@ -8,10 +8,10 @@ pages:
 - Ch2 - The Basics: BASICS.md
 - Ch3 - Building a World: WORLDFILES.md
 - Ch4 - Writing a Configuration (.cfg) File: CFGFILES.md
-- Ch5 - Controllers (C++): CONTROLLERS.md
-- Ch6 - Controllers (C): CONTROLLER_C.md
-- Ch7 - Controllers (Python/playercpp): CONTROLLER_PY.md
-- writing-your-docs.md
+- Ch5 - Getting your Simulation to run your code: CONTROLLERS.md
+- Ch6 - Controllers (C++): CONTROLLER_CPP.md
+- Ch7 - Controllers (C): CONTROLLER_C.md
+- Ch8 - Controllers (Python/playercpp): CONTROLLER_PY.md
 
 markdown_extensions:
 - toc:
