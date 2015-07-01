@@ -63,9 +63,13 @@ typeset in monospace font. For example,
 means to go to a terminal window and type the command given (`ls`), without
 the `>` character, then hit return.
 
-In many cases, you'll need two windows, since the first command (`player
-configfile.cfg`) doesn't quit till player is done.  I'll try to point out
-when this is the case.
+In many cases, you'll need to run first command (`player
+configfile.cfg`) in the backgroun, since it doesn't quit till player is
+done.  To do this, you add an ampersand (`&`) after the command.  So if you
+type `player configfile.cfg` in a terminal, it will appear to freeze.  If
+you however type `player configfile.cfg &` into the terminal, it will start
+up player and return.  Player will print information and debugging messages
+to your terminal!
 
 When you use files, you should examine the files to see how they are
 working, just running the examples will not teach you (as) much!
@@ -103,7 +107,7 @@ First we will run a world and configuration file that comes bundled with
   Player/Stage: 
 ```tiobox
 > cd /usr/local/share/stage/worlds
-> player simple.cfg
+> player simple.cfg 
 ```
 
 Assuming Player/Stage is installed properly you should now have a window open which looks like the figure below.  Congratulations,you can now build Player/Stage simulations!

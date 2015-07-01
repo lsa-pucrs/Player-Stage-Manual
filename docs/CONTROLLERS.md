@@ -64,9 +64,9 @@ information.
 
 Example controllers in various languages can be found in the Player source code
 under `examples/`.  These and more are documented at
-(http://playerstage.sourceforge.net/wiki/PlayerClientLibraries), and
+[http://playerstage.sourceforge.net/wiki/PlayerClientLibraries](http://playerstage.sourceforge.net/wiki/PlayerClientLibraries), and
 some matlab and python examples based on this manual are given at
-(http://turobotics.blogspot.com/2013/08/client-controllers-for-player-302-and.html).
+[http://turobotics.blogspot.com/2013/08/client-controllers-for-player-302-and.html](http://turobotics.blogspot.com/2013/08/client-controllers-for-player-302-and.html).
 
 ## 5.3 Wrap your code!
 Before beginning a project it is highly recommended that for any programs

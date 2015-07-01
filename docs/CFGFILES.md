@@ -275,9 +275,9 @@ driver
 
 ```tiobox
 > cd <source_code>/Ch4
-> player bigbob8.cfg
-> playerv --position2d:0
-> playerv -p 6666 -position2d:0
+> player bigbob8.cfg &
+> playerv --position2d:0 &
+> playerv -p 6666 -position2d:0 &
 ```
 
 To drive the robots around, you select Devices/Position2d/Subscribe, then 
