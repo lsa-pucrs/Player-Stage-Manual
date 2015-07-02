@@ -1,17 +1,31 @@
+In this chapter, C++ is used to demonstrate how to write external
+In this chapter, C++ is used as an example of how to write external
+controllers.  Since
+Player interacts with controlling code over network sockets, it's pretty
+easy to control robots (physical or simulated) with other languages as
+well.  Player officially supports C++, C, and Python (see 
+[http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__clientlibs.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__clientlibs.html)).
+There are also [Third party libraries](http://playerstage.sourceforge.net/wiki/PlayerClientLibraries)
+with support for clients ranging from Smalltalk to Java to MATLAB.
+
+First, I'll present serveral examples of how to interface with different
+sensors and actuators, then I'll present two case studies showing these
+interfaces in action.
+
 # 6.1 - Getting Started
 In order to compile your C++ program you use the following commands (in Linux):
 ```
 g++ -o example0 `pkg-config --cflags playerc++` example0.cc `pkg-config --libs playerc++`
 ```
 
-That will compile a program to a file called `example0` from the C++ code file \`example0.cc`. 
+That will compile a program to a file called `example0` from the C++ code file `example0.cc`. 
 
 An even easier and more general way is to make a `Makefile` that
 explains how to compile your code for you.  The [details of Makefiles](http://www.gnu.org/software/make/manual/make.html) are
 beyond the scope of this manual, but [a minimal
 example](http://github.com/NickelsLab/Player-Stage-Manual/blob/master/code/Ch6.1/Makefile) is
 given in the tutorial files that came with this manual.  If you have this
-`Makefile` in the same directory as your code, you can just type `make
+Makefile in the same directory as your code, you can just type `make
 file` and if the make program finds `file.cc` it will just "do
 the right thing".
 
@@ -235,7 +249,7 @@ This example shows how to get and set positions.
 Read through the code before executing.  
 
 ```tiobox
-> cd <source_code>/Ch6.2
+> cd <source_code>/Ch6.3
 > player bigbob7.cfg &
 > make bigbob8
 > ./bigbob8
@@ -251,7 +265,7 @@ inaccurate as the simulation goes on. If you want to log your robots
 position as it moves around, these functions along with the perfect
 odometry can be used.
 
-### SetMotorEnable()
+### 6.3.1.4 - SetMotorEnable( )
 This function takes a boolean input, telling Player whether to enable the
 motors or not. If the motors are disabled then the robot will not move no
 matter what commands are given to it, if the motors are enabled then the
@@ -323,7 +337,7 @@ This example shows how ranger sensors can be read.
 Read through the code before executing.  
 
 ```tiobox
-> cd <source_code>/Ch6.2
+> cd <source_code>/Ch6.3
 > player bigbob7.cfg &
 > make bigbob9
 > ./bigbob9
@@ -379,7 +393,7 @@ contains the following fields (see Figure 6.6 for illustration):
 This example shows how to extract info from a blobfinder.
 Read through the code before executing.  
 ```tiobox
-> cd <source_code>/Ch6.2
+> cd <source_code>/Ch6.3
 > player bigbob7.cfg &
 > make bigbob10
 > ./bigbob10
@@ -407,7 +421,7 @@ backwards.
 Read through the code before executing.  
 
 ```tiobox
-> cd <source_code>/Ch6.2
+> cd <source_code>/Ch6.3
 > player bigbob11.cfg &
 > make bigbob11
 > ./bigbob11
@@ -417,18 +431,22 @@ Read through the code before executing.
 The simulation proxy allows your code to interact with and change aspects
 of the simulation, such as an item's pose or its colour. 
 
-### Get/Set Pose
+### 6.3.5.1 - Get/Set Pose
 The item's pose is a special case of the Get/SetProperty function, because
 it is so likely that someone would want to move an item in the world they
 created a special function to do it.
 
-`SetPose2d(char *item_name, double x, double y, double yaw)`
+```
+setPose2d(char *item_name, double x, double y, double yaw)
+```
 
 In this case `item_name` is as with Get/SetProperty, but we can directly
 specify its new coordinates and yaw (coordinates and yaws are given with
 reference to the map's origin).
 
-`GetPose2d(char *item_name, double &x, double &y, double &yaw)`
+```
+GetPose2d(char *item_name, double &x, double &y, double &yaw)
+```
 
 This is like SetPose2d only this time it writes the coordinates and yaw to
 the given addresses in memory.
@@ -438,13 +456,13 @@ This example shows how to Get and Set pose of objects.
 Read through the code before executing.  
 
 ```tiobox
-> cd <source_code>/Ch6.2
+> cd <source_code>/Ch6.3
 > player bigbob11.cfg &
 > make bigbob12
 > ./bigbob12
 ```
 
-### Get/Set Property
+### 6.3.5.2 - Get/Set Property
 In Stage 4.1.1 the Get/SetProperty simulation proxy functions
 are only implemented for the property "color".  None of the other
 properties are supported.  Previous versions of Stage (before 3.2.2) had
@@ -457,9 +475,12 @@ set a model's property in those distributions.
 In this edition of the manual I will describe the only functioning
 Get/SetProperty, which is "color".
 
-To change a property of an item in the simulation we use the following function:
-
-`SetProperty(char *item_name, char *property, void *value, size_t value_len)`
+To retrieve or change a property of an item in the simulation we use the
+following functions:
+```
+GetProperty(char *item_name, char *property, void *value, size_t value_len)
+SetProperty(char *item_name, char *property, void *value, size_t value_len)
+```
 
 * `item_name`: this is the name that you gave to the object in the
   worldfile, it could be *any* model that you have described in the
@@ -474,9 +495,9 @@ To change a property of an item in the simulation we use the following function:
   declared in the configuration file for this to work either. We
   didn't write controllers for the oranges but we could still alter
   their properties this way.
-* `property`: Currently, `"_mp_color"` is the only supported propery about
+* `property`: Currently, `"_mp_color"` is the only supported property about
    a model that you can change.  
-* `value`: The value you want to assign to the property (see below).
+* `value`: a pointer to the value you want fill with the property or assign to the property (see below).
 * `value_len`: is the size of the value you gave in bytes. This can easily
   be found with the C or C++ `sizeof()` operator.
 
@@ -497,7 +518,7 @@ This example shows how to reset the color of an object.
 Read through the code before executing.  
 
 ```tiobox
-> cd <source_code>/Ch6.2
+> cd <source_code>/Ch6.3
 > player bigbob11.cfg &
 > make bigbob13
 > ./bigbob13
@@ -527,11 +548,11 @@ configuration file to control it. Now we can begin to put everything
 together to create a working simulation of this robot.
 
 ## 6.5.1 - The Control Architecture
-To collect rubbish we have three basic behaviours: 
+To zap rubbish we have three basic behaviours: 
 
 * **Wander**: to search for rubbish. 
-* **Move to item**: for when an item is spotted and the robot wants to collect it
-* **Collect item**: for dealing with collecting items.
+* **Move to item**: for when an item is spotted and the robot wants to zap it
+* **Collect item**: for dealing with zapping items.
 
 The robot will also avoid obstacles but once this is done it will switch
 back to its previous behaviour. The control will follow the state
@@ -541,7 +562,7 @@ transitions shown in Figure 6.7.
 | |
 | ---------------| 
 | ![Figure 6.7](pics/coding/arch_structureOA.png) |
-| Figure 6.7: The state transitions that the Bigbob rubbish collecting robot will follow. |
+| Figure 6.7: The state transitions that the Bigbob rubbish zapping robot will follow. |
 
 
 ## 6.5.2 - Beginning the Code
@@ -649,6 +670,7 @@ the `sleep()` command we will tell the control loop to wait one
 second between each execution. 
 `sleep()` is a standard C function and is included in
 the `unistd.h` header. 
+
 At this point we should also seed the random
 number generator with the current time so that the wander behaviour isn't
 exactly the same each time. For the sleep command we will need to include
@@ -897,7 +919,7 @@ simProxy.GetPose2d("bob1", x, y, yaw);
 Cross referencing the robot's position with the item positions is a matter
 of trigonometry, so isn't particularly relevant to a manual on Player/Stage. We
 won't reproduce the code here, but the full and final code developed for
-the Bigbob rubbish collecting robot is included in appendix D. The method
+the Bigbob rubbish zapping robot can be found [at github](http://github.com/NickelsLab/Player-Stage-Manual/). The method
 we used is to find the Euclidian distance of the items to the circle
 centre, and the smallest distance is the item we want to destroy. We made a
 subfunction called `FindItem` that returns the index of the item to be
@@ -931,19 +953,19 @@ if(laserProxy[90] < 0.25)
 ```
 The laser has 180 samples, so sample number 90 is the one which is perpendicular to Bigbob's teeth. This point returns a maximum of 0.25, so if its range was to fall below this then something has passed through the laser beam. We then find the item closest to the robot's teeth and move that item to coordinate *(-10, -10)* so it is no longer visible or accessible.
 
-Finally we have a working simulation of a rubbish collecting robot! 
-The code comprises the source `<source_code>/Ch6.2/bigbob13.cc`, 
-the simulation world `<source_code>/Ch6.2/bigbob11.world`, and 
-configuration file `<source_code>/Ch6.2/bigbob11.cfg`.
+Finally we have a working simulation of a rubbish zapping robot! 
+The code comprises the source `<source_code>/Ch6.5/bigbob.cc`, 
+the simulation world `<source_code>/Ch6.5/bigbob.world`, and 
+configuration file `<source_code>/Ch6.5/bigbob.cfg`.
 
 #### TRY IT OUT (bigbob)
 This example shows the final code for the trash-zapping robot.
 Read through the code before executing.  
 ```tiobox
-> cd <source_code>/Ch6.2
-> player bigbob11.cfg &
-> make bigbob13
-> ./bigbob13
+> cd <source_code>/Ch6.5
+> player bigbob.cfg &
+> make bigbob
+> ./bigbob
 ```
 
 # 6.6 - Case Study 2: Simulating Multiple Robots
@@ -963,6 +985,9 @@ bigbob
 	color "yellow"
 )
 ```
+
+## 7.6.1 - Each robot on it's own port
+
 If there are multiple robots in the simulation, the standard practice is to
 put each robot on its own port (see [Section 4.1 - Device Address](#41-device-addresses). To implement this in the configuration file
 we need to tell Player which port to find our second robot on:
@@ -1008,6 +1033,18 @@ robot (obviously the robot's port number would need to be a
 parameter otherwise they'll all connect to the same port and consequently
 the same robot.) and all the simulated robots will run the same code.
 
+#### TRY IT OUT (bigbob2)
+This example shows the final code for two trash-zapping robots.
+Read through the code before executing.  
+```tiobox
+> cd <source_code>/Ch7.6
+> player bigbob2a.cfg &
+> make bigbob2a
+> ./bigbob2a
+```
+
+## 7.6.2 - Each interface on it's own index
+
 An alternative to using a port for each robot is to use the same port but a
 different index. 
 
@@ -1041,7 +1078,14 @@ RangerProxy sprox2(&robot,2);
 //shared Simultion proxy...
 SimulationProxy sim(&robot,0);
 ```
-The main advantage of configuring the robot swarm this way is that it
-allows us to only have one simulation proxy which is used by all robots.
-This is good since there is only ever one simulation window that you can
-interact with and so multiple simulation proxies are unnecessary.
+
+#### TRY IT OUT (bigbob2, unique indices)
+This example shows the final code for the trash-zapping robot.
+Read through the code before executing.  
+```tiobox
+> cd <source_code>/Ch7.6
+> player bigbob2b.cfg &
+> make bigbob2b
+> ./bigbob2b
+```
+

@@ -3,7 +3,7 @@ repo_url: https://github.com/NickelsLab/Player-Stage-Manual
 theme: readthedocs
 
 pages:
-- Home: index.md
+- Home: README.md
 - Ch1 - Introduction: INTRO.md
 - Ch2 - The Basics: BASICS.md
 - Ch3 - Building a World: WORLDFILES.md
