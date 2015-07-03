@@ -1,13 +1,13 @@
 In [Chapter 6](CONTROLLER_CPP.md) only C++ was used as an example.  Since
 Player interacts with controlling code over network sockets, it's pretty
 easy to control robots (physical or simulated) with other languages as
-well.  Player officially supports C and Python (see 
+well.  Player officially supports C++, C, and Python (see 
 [http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__clientlibs.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__clientlibs.html)).
 There are also [Third party
 libraries](http://playerstage.sourceforge.net/wiki/PlayerClientLibraries)
 with support for clients ranging from Smalltalk to Java to MATLAB.
 
-In the subsequent chapters, I will review the same examples given in
+In this chapter, I will review the same examples given in
 [Chapter 6](CONTROLLER_CPP.md) for C++, hilighting the differences in the
 new language.  Then, I will provide a new version of the 
 [Trash Zapping Robot](CONTROLLER_CPP.md#65-using-proxies-case-study-1-using-c-for-a-trash-zapping-robot)

@@ -484,7 +484,7 @@ SetProperty(char *item_name, char *property, void *value, size_t value_len)
 
 * `item_name`: this is the name that you gave to the object in the
   worldfile, it could be *any* model that you have described in the
-  worldfile. For example, in [This Example](WORLDFILES.md#322-an-example-robot) in the
+  worldfile. For example, in [Section 3.2.2 - An Example Robot](WORLDFILES.md#322-an-example-robot) in the
   worldfile we declared a Bigbob type robot which we called
   "bob1" so the `item_name` for that object is "bob1". Similarly
   in [Section 3.2.3 - Building Other Stuff](WORLDFILES.md#323-building-other-stuff) we built some
@@ -527,11 +527,11 @@ Read through the code before executing.
 		
 # 6.4 - General Useful Commands
 
-## 6.4.1 - Read()
+## 6.4.1 - Read( )
 To make the proxies update with new sensor data we need to tell the player server to update, we can do this using the PlayerClient object which we used to connect to the server. All we have to do is run the command `playerClient_name.Read()` every time the data needs updating (where playerClient_name is the name you gave the PlayerClient object). Until this command is run, the proxies and any sensor information from them will be empty. 
 The devices on a typical robot are asynchronous and the devices in a Player/Stage simulation are also asynchronous, so running the `Read()` command won't always update everything at the same time, so it may take several calls before some large data structures (such as a camera image) gets updated.
 
-## 6.4.2 - GetGeom()
+## 6.4.2 - GetGeom( )
 Most of the proxies have a function called `GetGeom` or `GetGeometry` or `RequestGeometry`, or words to that effect. What these functions do is tell the proxy retrieve information about the device, usually its size and pose (relative to the robot). The proxies don't know this by default since this information is specific to the robot or the Player/Stage robot model. If your code needs to know this kind of information about a device then the proxy must run this command first.
 
 # 6.5 - Using Proxies: Case Study 1: using C++ for a Trash-Zapping Robot
