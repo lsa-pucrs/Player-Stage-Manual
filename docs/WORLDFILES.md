@@ -549,7 +549,7 @@ describe the *shape* of the robot, not its size or location in the map.
 This example shows the more accurate rendering of Big Bob.
 
 ```tiobox
-> cd <source_code/Ch3
+> cd <source_code>/Ch3
 > stage bigbob2.world &
 ```
 
@@ -661,8 +661,8 @@ define bigbobs_ranger ranger
 )
 ```
 
-Here we tell Player/Stage that we will `define` a type of sensor
-called `bigbobs_sonars`.  Next, we'll tell Player/Stage to use these
+Here we tell Player/Stage that we will define a type of sensor
+called bigbobs_sonars.  Next, we'll tell Player/Stage to use these
 sensors in a ranging device. Let's put four sonars on Bigbob, one on the
 front of each tooth, and one on the front left and the front right corners
 of its body. 
@@ -726,11 +726,14 @@ This file includes everything described up till now.
 > playerv --ranger:0  &
 ```
  
-This will start player in the background, then start a "remote control".
+This will start player in the background, then start a "remote control"
+(also in the background).  You may need to move the playerv window out of
+the way to see the Stage window.
+
 See [the playerv
 documentation](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__util__playerv.html)
-for details.  For now, the "remote control" just makes the ranger sensor
-cones appear.  
+for details on playerv.  For now, the "remote control" just makes the
+	ranger sensor cones appear.  
 
 <!---
 If you hilight the PlayerViewer window, and select the Devices/position2d:0
@@ -930,7 +933,8 @@ occupying the world, as shown in Figure 3.12.
 | |
 | ---------------| 
 | ![Figure 3.12](pics/robot_building/final_robot_build_wsensors.png) |
-| Figure 3.12: Our bob1 robot placed in the simple world, showing the range and field of view of the ranger sensors. |
+| Figure 3.12: Our bob1 robot placed in the simple world, showing the range
+and field of view of all of the ranger sensors. |
 	
 #### TRY IT OUT (Bigbob in environment)
 This should show you Figure 3.12
@@ -940,6 +944,7 @@ This should show you Figure 3.12
 > player bigbob6.cfg &
 > playerv --ranger:0 --ranger:1 &
 ```
+You may wish to zoom in on the teeth to see the tooth laser.  
 
 ### 3.2.3 - Building Other Stuff 
 We established in [Section 3.2.2 - An Example Robot](#322-an-example-robot)

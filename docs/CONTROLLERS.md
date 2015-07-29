@@ -38,7 +38,14 @@ actually call these functions with your code and know how to use them.
 | Figure 5.2: The server/client control structure of Player/Stage when used as a simulator. There may be several proxies connected to the server at any time. |
 
 ## 5.1 Types of controllers
-Player is compatable with C, C++ or Python player controllers.  
+Player is compatable with C, C++ or Python player controllers.  The
+official documentation for each can be found at:
+
+* libplayerc - [http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__player__clientlib__libplayerc.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__player__clientlib__libplayerc.html)
+* libplayerc++ - [http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__player__clientlib__cplusplus.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__player__clientlib__cplusplus.html)
+* python bindings for libplayerc - [http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__player__clientlib__libplayerc__py.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__player__clientlib__libplayerc__py.html)
+* python bindings for libplayerc++ - not separately documented, see the
+  libplayerc++ documentation.
 
 There are also such things as "stage controllers" such as those distributed in
 the stage source code under `examples/ctrl`, but in this manual we'll only
@@ -50,22 +57,23 @@ line to use the examples given here.  Player controllers can control a real or
 a simulated robot.
 
 We will start in [Chapter 6](CONTROLLER_CPP.md) by using C++ since it's
-pretty general.  Then, we'll cover C controllers in [Chapter
-7](CONTROLLER_C.md), and Python controllers in [Chapter
-8](CONTROLLER_PY.md).
+pretty general.  Then, we'll cover C controllers in 
+[Chapter 7](CONTROLLER_C.md), and Python controllers in 
+[Chapter 8](CONTROLLER_PY.md) and [Chapter 9](CONTROLLER_PYC.md)
 
 The process of writing Player code is mostly the same for each different
-language though. The Player and Player proxy functions have different names for
-each language, but work in more or less the same way, so even if you don't
-plan on using C++ or Stage this section will still contain helpful
-information.  
+language though. The libplayerc and libplayercpp proxy functions have
+different names for each language, but work in more or less the same way,
+so even if you don't plan on using C++ or Stage this section will still
+contain helpful information.  
 
 ## 5.2 Example Controllers
 
-Example controllers in various languages can be found in the Player source code
-under `examples/`.  These and more are documented at
-[http://playerstage.sourceforge.net/wiki/PlayerClientLibraries](http://playerstage.sourceforge.net/wiki/PlayerClientLibraries), and
-some matlab and python examples based on this manual are given at
+Some example controllers in various languages can be found in the Player
+source code under `examples/`.  These and more are documented at
+[http://playerstage.sourceforge.net/wiki/PlayerClientLibraries](http://playerstage.sourceforge.net/wiki/PlayerClientLibraries).
+
+Some matlab and python examples based on this manual are given at
 [http://turobotics.blogspot.com/2013/08/client-controllers-for-player-302-and.html](http://turobotics.blogspot.com/2013/08/client-controllers-for-player-302-and.html).
 
 ## 5.3 Wrap your code!
