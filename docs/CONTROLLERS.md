@@ -59,7 +59,7 @@ a simulated robot.
 We will start in [Chapter 6](CONTROLLER_CPP.md) by using C++ since it's
 pretty general.  Then, we'll cover C controllers in 
 [Chapter 7](CONTROLLER_C.md), and Python controllers in 
-[Chapter 8](CONTROLLER_PY.md) and [Chapter 9](CONTROLLER_PYC.md)
+[Chapter 8](CONTROLLER_PYCPP.md) and [Chapter 9](CONTROLLER_PYC.md)
 
 The process of writing Player code is mostly the same for each different
 language though. The libplayerc and libplayercpp proxy functions have

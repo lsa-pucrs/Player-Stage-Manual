@@ -2,7 +2,7 @@ import sys
 import os
 
 # Check with "locate playerc.py"
-sys.path.append('/usr/local/lib64/python2.7/site-packages/')
+sys.path.append('/usr/local/lib/python2.7/site-packages/')
 
 import math
 from playerc import *

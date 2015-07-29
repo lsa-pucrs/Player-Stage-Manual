@@ -2,7 +2,7 @@
 
 5th Edition
 
-Using Player 3.0.2 and Stage 4.1.1
+Using Player 3.0.2 and Stage 4.1.1 (latest stable versions)
 
 Kevin Nickels and Jennifer Owen
 
@@ -33,7 +33,8 @@ previous edition of this manual is now out of date.
 5. [Getting Your Simulation to Run Your Code](CONTROLLERS.md)
 5. [Controllers (C++)](CONTROLLER_CPP.md)
 5. [Controllers (C)](CONTROLLER_C.md)
-5. [Controllers (Py)](CONTROLLER_PY.md)
+5. [Controllers (Py-libplayercpp)](CONTROLLER_PYCPP.md)
+5. [Controllers (Py-libplayerc)](CONTROLLER_PYC.md)
 
 ### Change Log
 * 30 June 2015 updating markdown for readthedocs.org
