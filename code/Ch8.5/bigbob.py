@@ -271,7 +271,9 @@ int main(int argc, char *argv[])
 
       Position2dProxy p2dProxy(&robot,0);
       RangerProxy      sonarProxy(&robot,0);
-      BlobfinderProxy blobProxy(&robot,0);
+      #BlobfinderProxy blobProxy(&robot,0);
+	  FiducialProxy   fidProxy(&robot,0);
+
       RangerProxy      laserProxy(&robot,1);
       SimulationProxy simProxy(&robot,0);
       
