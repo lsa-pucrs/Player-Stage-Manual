@@ -20,7 +20,7 @@ if robot.read() == None:
 
 print bf.blobs_count," blobs found"
 for i in range(bf.blobs_count):
-	blob = bf.blobs[i];
+	blob = bf.blobs[i];  # indexing not working right either - more SWIG
 	print 'BLOB %d, ' % i
         # Can't seem to access .color .x .y .top .left .right .bottom from
         # python.  
