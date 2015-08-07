@@ -23,7 +23,12 @@ help from the Player community at
 
 This edition of the manual uses Stage version 4.1.1.  As there are
 significant differences with the previous versions of Stage and the
-previous edition of this manual is now out of date. 
+previous edition of this manual is now out of date. They are available at
+
+* [v2.0.0 - Using player-3.0.2 and stage-3.2.x (PDF)](http://player-stage-manual-readthedocs.org/en/v2.0.0/)
+* [v4.0.0 - Using player-3.0.2 and stage-4.1.1 (PDF)](http://player-stage-manual-readthedocs.org/en/v4.0.0/)
+* [latest - Using very latest code from github.com - player-3.0.2-svn and Stage from (RTD)](http://player-stage-manual-readthedocs.org/en/latest/)
+
 
 # TABLE OF CONTENTS
 1. [Introduction](INTRO.md)
@@ -37,8 +42,9 @@ previous edition of this manual is now out of date.
 5. [Controllers (Py-libplayerc)](CONTROLLER_PYC.md)
 
 ### Change Log
-* 30 June 2015 updating markdown for readthedocs.org
-* 18 May 2015 began migration from LaTeX to MARKDOWN on GitHub
+* 7 Aug 2015 released v4.1.0 covering stable versions
+* 30 June 2015 updating markdown for [readthedocs.org](http://readthedocs.org)
+* 18 May 2015 began migration from LaTeX to MARKDOWN on [GitHub](http://github.com)
 * August 2013 updated manual to Stage 4.1.1
 * 1st August 2013 Source code made available online
 * 16th April 2010 updated manual to Stage 3.2.2
