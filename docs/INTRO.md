@@ -75,7 +75,8 @@ working, just running the examples will not teach you (as) much!
 
 ## 1.3 - TRY IT OUT (Preparation)
 
-* If you haven't already, download the sample code from [here](http://github.com/NickelsLab/Player-Stage-Manual/archive/master.zip) 
+* If you haven't already, download the sample code from 
+ [http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip](http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip) 
 * Next, you'll need to extract the sample code.  To do this, open a
  terminal and cd to the directory where you put the file
  `master.zip`, then extract using zip.  Yes, there are
