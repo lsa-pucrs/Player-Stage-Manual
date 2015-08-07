@@ -1,4 +1,4 @@
-/* bigbob12.cc - deom simulationproxy interface (GetSetPose)
+/* bigbob12.cc - demo simulationproxy interface (GetSetPose)
  * K. Nickels 7/24/13
  */
 

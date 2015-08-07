@@ -1,10 +1,4 @@
-# Python client example.
-# Shows simulation proxy interfaces
-
-# To execute:
-# > player bigbob11.cfg (in one terminal window)
-# > python bigbob12.py (in another terminal window)
-# 
+# fids.py - demonstrate use of fiducials
 # Original author: K. Nickels 6/10/15
 
 import sys, os, math

@@ -1,5 +1,8 @@
 import sys
 import os
+# simple.py - a conversion of example file simple.c distributed with
+# player-3.0.2
+# Converted K. Nickels
 
 # Check with "locate playerc.py"
 sys.path.append('/usr/local/lib/python2.7/site-packages/')

@@ -6,7 +6,7 @@ Using Player 3.0.2 and Stage 4.1.1 (latest stable versions)
 
 Kevin Nickels and Jennifer Owen
 
-17 June 2015
+7 July 2015
 
 A user manual for the Player/Stage robot simulator.
 

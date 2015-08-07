@@ -1,6 +1,5 @@
-/* Simple C client example.
- * Based on simple.c from player distribution
- * K. Nickels 6/8/14
+/* bigbob10.cc - demo blobfinder interface
+ * K. Nickels 7/24/13
  */
 
 #include <stdio.h>

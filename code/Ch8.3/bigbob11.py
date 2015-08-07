@@ -1,15 +1,11 @@
-# Simple python client example.
-# Shows gripper and how it works.
-
-# To run, compile this program.
-# execute:
-# > player bigbob4.cfg (in one terminal window)
-# > ./ex_gripper (in another terminal window)
-
-# Original author: K. Nickels 7/24/13
+#/* bigbob11.cc 
+# * Shows gripper, and how it works.
+# * K. Nickels 7/24/13
+# */
 
 import sys, os, math
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
+sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 from playercpp import *
 
 def gripper_state (state): 

@@ -1,4 +1,6 @@
-# bigbob9.py - Ranger
+#/* bigbob9.py - demo ranger interface
+# * K. Nickels 7/24/13
+# */
 
 # Check with "locate playerc.py"
 import sys,os

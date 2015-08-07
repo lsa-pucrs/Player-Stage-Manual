@@ -1,5 +1,4 @@
-/* Simple C client example.
- * Based on simple.c from player distribution
+/* bigbob9.c - demo ranger interface
  * K. Nickels 6/5/14
  */
 

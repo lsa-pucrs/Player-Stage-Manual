@@ -1,9 +1,11 @@
-# Based on example0.cc from player distribution
-# Original Author: K. Nickels 7/24/13
+#/* bigbob9.c - demo ranger interface
+# * K. Nickels 6/5/14
+# */
 
 # Import all of this for all entries.  Fix path as necessary
 import sys, os, math
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
+sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 from playercpp import *
 
 # Create proxies for Client, Sonar, Tooth, Laser, Position2d

@@ -1,5 +1,5 @@
-/* Example 'bigbob12.c' - show use of get/set pose
- * K. Nickels 7/2/15
+/* bigbob12.c - demo simulationproxy interface (GetSetPose)
+ * K. Nickels 7/24/13
  */
 
 #include <stdio.h>

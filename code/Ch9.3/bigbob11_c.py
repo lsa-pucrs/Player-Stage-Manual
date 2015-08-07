@@ -1,6 +1,7 @@
-# Simple python client example 
-# Based on example0.cc from player distribution
-# K. Nickels 7/24/13
+#/* bigbob11.cc 
+# * Shows gripper, and how it works.
+# * K. Nickels 7/24/13
+# */
 
 import sys, os
 sys.path.append('/usr/local/lib/python2.7/site-packages/')

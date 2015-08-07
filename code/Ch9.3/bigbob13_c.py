@@ -1,3 +1,6 @@
+# bigbob13_c.py - demo simulationproxy interface (GetSetProperty)
+# Original author: K. Nickels 6/10/15
+
 import math, sys, os
 sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 sys.path.append('/usr/local/lib/python2.7/site-packages/')

@@ -1,4 +1,4 @@
-/* bigbob13.cc - deom simulationproxy interface (GetSetProperty)
+/* bigbob13.cc - demo simulationproxy interface (GetSetProperty)
  * K. Nickels 7/24/13
  */
 

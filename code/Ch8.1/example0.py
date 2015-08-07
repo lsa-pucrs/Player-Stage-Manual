@@ -1,5 +1,10 @@
+# example0.py - a conversion of example file example0.cc distributed with
+# player-3.0.2
+# Converted K. Nickels
+
 import math, sys, os
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
+sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 from playercpp import *
 
 # Make proxies for Client, Sonar, Position2d

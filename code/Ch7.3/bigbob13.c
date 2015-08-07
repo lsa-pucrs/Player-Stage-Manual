@@ -1,4 +1,4 @@
-/* Example 'bigbob13.c' - show use of get/set property (color)
+/* bigbob13.cc - demo simulationproxy interface (GetSetProperty)
  * K. Nickels 7/2/15
  */
 

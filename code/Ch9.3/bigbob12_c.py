@@ -1,6 +1,5 @@
-# Simple python client example 
-# Based on example0.cc from player distribution
-# K. Nickels 7/24/13
+# bigbob12_c.py - demo simulationproxy interface (GetSetPose)
+# Original author: K. Nickels 6/10/15
 
 import math, sys, os
 sys.path.append('/usr/local/lib64/python2.7/site-packages/')

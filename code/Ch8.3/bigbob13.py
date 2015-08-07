@@ -1,12 +1,9 @@
-# To execute:
-# > player bigbob11.cfg (in one terminal window)
-# > python bigbob13.py (in another terminal window)
-# 
+# bigbob13.py - demo simulationproxy interface (GetSetProperty)
 # Original author: K. Nickels 6/10/15
 
 import sys, os, math
-sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
+sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 from playercpp import *
 
 robot = PlayerClient("localhost")

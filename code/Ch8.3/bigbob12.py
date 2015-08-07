@@ -1,15 +1,9 @@
-# Python client example.
-# Shows simulation proxy interfaces
-
-# To execute:
-# > player bigbob11.cfg (in one terminal window)
-# > python bigbob12.py (in another terminal window)
-# 
+# bigbob12.py - demo simulationproxy interface (GetSetPose)
 # Original author: K. Nickels 6/10/15
 
 import sys, os, math
-sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
+sys.path.append('/usr/local/lib64/python2.7/site-packages/')
 from playercpp import *
 
 robot = PlayerClient("localhost")

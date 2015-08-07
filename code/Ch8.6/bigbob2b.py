@@ -1,4 +1,5 @@
-# Case Study 2 - multiple robots
+# bigbob2b.py 
+# Case Study 2 - multiple robots (method 2)
 
 import math, sys, os
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
