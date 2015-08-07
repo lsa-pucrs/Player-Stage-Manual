@@ -114,3 +114,4 @@ Assuming Player/Stage is installed properly you should now have a window open wh
 
 ![The simple.cfg world after being run](pics/simpleworld.png)
 
+![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)
