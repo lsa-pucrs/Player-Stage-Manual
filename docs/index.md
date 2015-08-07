@@ -49,3 +49,6 @@ previous edition of this manual is now out of date. They are available at
 * 1st August 2013 Source code made available online
 * 16th April 2010 updated manual to Stage 3.2.2
 * 10th July 2009 original manual covering Stage versions 2.1.1 and 3.1.0
+
+![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)
+
