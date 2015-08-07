@@ -1,5 +1,4 @@
-/* Simple C++ client example.
- * Based on example0.cc from player distribution
+/* bigbob10.cc - demo blobfinder interface
  * K. Nickels 7/24/13
  */
 

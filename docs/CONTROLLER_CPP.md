@@ -1049,7 +1049,7 @@ An alternative to using a port for each robot is to use the same port but a
 different index. 
 
 For example, the Bigbob robot uses interfaces and indexes: position2d:0,
-ranger:0, blobfinder:0 and ranger:0. If we configured two Bigbob robots to
+ranger:0, blobfinder:0 and ranger:1. If we configured two Bigbob robots to
 use the same port but a different index our configuration file would be
 like this: 
 ```

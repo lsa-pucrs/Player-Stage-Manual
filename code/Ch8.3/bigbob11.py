@@ -1,7 +1,7 @@
 # Simple python client example.
 # Shows gripper and how it works.
 
-# To run, complie this program.
+# To run, compile this program.
 # execute:
 # > player bigbob4.cfg (in one terminal window)
 # > ./ex_gripper (in another terminal window)
@@ -9,22 +9,29 @@
 # Original author: K. Nickels 7/24/13
 
 import sys, os, math
-sys.path.append('/usr/local/lib64/python2.7/site-packages/')
+sys.path.append('/usr/local/lib/python2.7/site-packages/')
 from playercpp import *
 
 def gripper_state (state): 
     return {
-        1: 'open',
-        2: 'closed',
-        3: 'moving',
-        4: 'error',
+        PLAYER_GRIPPER_STATE_OPEN: 'open',
+        PLAYER_GRIPPER_STATE_CLOSED: 'closed',
+        PLAYER_GRIPPER_STATE_MOVING: 'moving',
+        PLAYER_GRIPPER_STATE_ERROR: 'error',
         }.get(state,'unknown')
+
 
 
 # Make proxies for Client, Gripper, and Position2d
 robot = PlayerClient("localhost");
 gp = GripperProxy(robot,0);
 pp = Position2dProxy(robot,0)
+
+#  /* read from the proxies */
+gp.get_geom()
+robot.read()
+gp.gripper_printout("state of gripper");
+print "Number of breakbeams: %d" % gp.num_beams
 
 # Keep going till you see something
 while(not gp.GetBeams()):
@@ -50,5 +57,11 @@ for i in range(20):
 	robot.Read()
 	print "Gripper is " + gripper_state(gp.GetState())
 
+# Go forward 
+p.set_cmd_vel(0.0, 0.1, 0.0, 1)
+
+#  /* approach orange - keep going till it's in the breakbeam */
+
+
 # Stop
-pp.SetSpeed(0,0)
+pp.set_cmd_vel(0,0,0,1);

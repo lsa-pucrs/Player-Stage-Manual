@@ -1,5 +1,4 @@
-/* Simple C++ client example.
- * Based on example0.cc from player distribution
+/* bigbob13.cc - deom simulationproxy interface (GetSetProperty)
  * K. Nickels 7/24/13
  */
 
@@ -27,6 +26,9 @@ int main(int argc, char *argv[]) {
     robot.Read();
     sp.GetProperty((char *)"puck1",(char*)"color",puckcolor,4*sizeof(float));
     cout << "Puck1 is color = ("<<puckcolor[0]<<","<<puckcolor[1]<<","
+         << puckcolor[2]<<","<<puckcolor[3]<<")"<<endl;
+    sp.GetProperty((char *)"puck2",(char*)"color",puckcolor,4*sizeof(float));
+    cout << "Puck2 is color = ("<<puckcolor[0]<<","<<puckcolor[1]<<","
          << puckcolor[2]<<","<<puckcolor[3]<<")"<<endl;
     sp.GetProperty((char *)"puck3",(char*)"color",puckcolor,4*sizeof(float));
     cout << "Puck3 is color = ("<<puckcolor[0]<<","<<puckcolor[1]<<","

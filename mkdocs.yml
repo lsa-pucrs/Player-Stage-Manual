@@ -14,6 +14,6 @@ pages:
 - Ch8 - Controllers (Python/playercpp): CONTROLLER_PYCPP.md
 - Ch9 - Controllers (Python/playerc): CONTROLLER_PYC.md
 
-#markdown_extensions:
-#- toc:
-#    permalink: True
+markdown_extensions:
+- toc:
+    permalink: True

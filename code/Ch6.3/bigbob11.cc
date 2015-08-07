@@ -1,11 +1,5 @@
-/* Simple C++ client example.
+/* bigbob11.cc 
  * Shows gripper, and how it works.
- *
- * To run, compile this program.
- * execute:
- * > player bigbob4.cfg (in one terminal window)
- * > ./ex_gripper (in another terminal window)
- *
  * K. Nickels 7/24/13
  */
 
@@ -18,10 +12,6 @@ const char *gripper_state(int s) {
         case PLAYER_GRIPPER_STATE_CLOSED: return "closed"; break;
 		case PLAYER_GRIPPER_STATE_MOVING: return "moving"; break;
         case PLAYER_GRIPPER_STATE_ERROR: return "error"; break;
-        /*case 1: return "open"; break;
-        case 2: return "closed"; break;
-        case 3: return "moving"; break;
-        case 4: return "error"; break;*/
         default: return "unknown"; break;
     }
 }

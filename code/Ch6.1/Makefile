@@ -1,3 +1,7 @@
+# Minimal C++ makefile
+# Kevin Nickels
+# Just type "make exec" and if exec.cc exists, it'll do the right thing
+
 CXXFLAGS = `pkg-config --cflags playerc++` -g
 CFLAGS = `pkg-config --cflags playerc` -g
 LDLIBS = `pkg-config --libs playerc++`

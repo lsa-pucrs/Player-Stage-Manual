@@ -1,7 +1,5 @@
-// Desc: Bigbob code for controlling a junk finding robot.
-// Author:  Jennifer Owen
-// Date: 16/04/2010
-// Updates (Stage4) Kevin Nickels 7 Aug 2013
+// Desc: Case Study 2 - multiple robots
+// Author:  Kevin Nickels
 
 #include <stdio.h>
 #include <unistd.h>

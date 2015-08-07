@@ -9,8 +9,12 @@ with support for clients ranging from Smalltalk to Java to MATLAB.
 
 In this chapter, I will review the same examples given in
 [Chapter 6](CONTROLLER_CPP.md) for C++, hilighting the differences in the
-new language.  Then, I will provide a new version of the 
+new language.  
+Then, I will provide a new version of the 
+case studies
 [Trash Zapping Robot](CONTROLLER_CPP.md#65-using-proxies-case-study-1-using-c-for-a-trash-zapping-robot)
+and
+[Simulating Multiple Robots](CONTROLLER_CPP.md#66-case-study-2-simulating-multiple-robots)
 for each.
 
 # 8.1 - Coding in Python with `playercpp.py`
@@ -40,7 +44,11 @@ and observe the path with `site-packages` in it's name.
 
 The first thing to do within your code is to include the Player interface
 file. Assuming Player/Stage is installed correctly on your machine then
-this can be done with the line `from playercpp import *`
+this can be done with the line 
+
+```
+from playercpp import *
+```
 
 Next we need to establish a Player Client, which will interact with the
 Player server for you. To do this we use the line:
@@ -207,7 +215,7 @@ speed and a turning speed before sending it to the proxy. For car-like
 drives there is the `SetCarlike` which again is the forward speed in m/s
 and the drive angle in radians.
 
-### 8.3.1.2 - GetSpeed ( )
+### 8.3.1.2 - Get_Speed ( )
 
 The GetSpeed commands are essentially the reverse of the SetSpeed
 command. Instead of setting a speed they return the current speed relative
@@ -288,7 +296,8 @@ Angles are given with reference to the laser's centre front (see Figure
   index `GetRangeCount()-1`.
   For a multiple-sensor device, the `ranger_number` is
   given by the order in which you included the sensor in the world file.
-  ** BUG ALERT ** `RangerProxy` does not support indexing in the current
+** BUG ALERT ** 
+* `RangerProxy` does not support indexing in the current
   distributed version of `player`/`playercpp.py`.  Use `GetRange()` below.
 * `GetRange(ranger_number)`: Same as `rangerProxy_name[ranger_number]`.
 * `GetMinAngle()`: gives the minimum angle (One tricky thing - you need to
@@ -342,12 +351,10 @@ need. The `playerc_blobfinder_blob_t` structure, documented in the [Player
 manual](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/structplayer__blobfinder__blob.html) 
 contains the following fields (see Figure 6.6 for illustration):
 
-**BUG ALERT**
-
+> **BUG ALERT**
 > Unfortunately, the C to Python interface doesn't do a good job at
 > accessing data buried in C structures from python.  So you can't get at the
-> properties of the blob.  If anyone knows how to get around this, please email
-> knickels@trinity.edu and let me know!
+> properties of the blob.  
 
 * `color`: The colour of the blob it detected. This is given as a hexadecimal value.
 * `area`: The area of the blob's bounding box. (In
@@ -375,9 +382,13 @@ contains the following fields (see Figure 6.6 for illustration):
 | :---------------:| 
 | ![Figure 8.6](pics/coding/blobfinder_image.png) |
 | Figure 8.6: What the fields in `playerc_blobfinder_blob_t` mean. The blob on the left has a geometric centre at *(x,y)*, the blob on the right has a bounding box with the top left corner at *(left, top)* pixels, and a lower right coordinate at *(right, bottom)* pixels. Coordinates are given with reference to the top left corner of the image. |
+
 ### TRY IT OUT (blobfinder)
-This example shows how to extract info from a blobfinder.
+This example is supposed to show how to extract info from a blobfinder.
 Read through the code before executing.  
+As mentioned above, this does not currently work.  If you *need* a
+blobfinder, you must write your controller in C or C++.
+
 ```tiobox
 > cd <source_code>/Ch8.3
 > player bigbob7.cfg &
@@ -402,14 +413,15 @@ broken.
 This example shows a robot approaching a box, gripping it, and dragging it
 backwards.
 Read through the code before executing.  
+Note that the current version of Stage has a bug drawing the paddles
+(sides of the gripper).  When you issue a Close() command, they get an
+unexpected offset.
 
 ```tiobox
 > cd <source_code>/Ch8.3
 > player bigbob11.cfg &
 > python bigbob11.py
 ```
-
-** CODE DEVELOPMENT STOPPED HERE -- CODE BELOW NOT TESTED **
 
 ## 8.3.5 - SimulationProxy
 The simulation proxy allows your code to interact with and change aspects of the simulation, such as an item's pose or its colour. 
@@ -428,21 +440,16 @@ specify its new coordinates and yaw (coordinates and yaws are given with
 reference to the map's origin).
 
 **BUG ALERT**
-> Unfortunately, the C to Python interface doesn't do a good job at passing
-> pointers from python.  In order to to do this, you need to add a couple
-> lines to 
-> `<player_src>/client_libs/libplayerc++/bindings/python/playercpp.i` 
-> as described in
-> [this mailing list message](http://sourceforge.net/p/playerstage/mailman/message/33377207/)
-> (and recompile and reinstall player)
-> for this pointer magic to work.
->
+
+> Unfortunately, the C++ to Python interface doesnt allow passing 
+> pointers from python.   Thus, the GetPose2d call doesn't work. 
+
 > If you download and compile the latest version of player, found [on
 > github](http://github.com/playerproject/player), has this fix applied.
 
 
 ```
-GetPose2d(item_name, doublePtr x, doublePtr y, doublePtr yaw)
+GetPose2d(item_name, double &x, double &y, double &yaw)
 ```
 
 This is like SetPose2d only this time it writes the coordinates and yaw to
@@ -450,10 +457,11 @@ the given addresses in memory.
 
 
 ### TRY IT OUT (GetSetPose)
-This example shows how to Get and Set pose of objects.
+This example shows how to Set the pose of objects.
 Read through the code before executing.  
+Note that due to the bug mentioned above, you can SetPose() but not
+GetPose()
 
-** NOT TESTED **
 ```tiobox
 > cd <source_code>/Ch8.3
 > player bigbob11.cfg &
@@ -476,9 +484,14 @@ Get/SetProperty, which is "color".
 To change a property of an item in the simulation we use the following function:
 
 ```
-GetProperty(item_name, property, doublePtr value, value_len)
-SetProperty(item_name, property, value, value_len)
+GetProperty(item_name, property, *value, value_len)
+SetProperty(item_name, property, *value, value_len)
 ```
+
+> ** BUG ALERT **
+> Unfortunately, the C to Python interface doesn't do a good job at
+> accessing data behind a pointer.  So you can't get at the
+> data within the *value.  
 
 * `item_name`: this is the name that you gave to the object in the
   worldfile, it could be *any* model that you have described in the
@@ -514,7 +527,7 @@ The `value` parameter is dependant on which `property` you want to set.
 This example shows how to reset the color of an object.
 Read through the code before executing.  
 
-** NOT TESTED **
+** NONFUNCTIONAL**
 ```tiobox
 > cd <source_code>/Ch8.3
 > player bigbob11.cfg &
@@ -539,422 +552,18 @@ several calls before some large data structures (such as a camera image)
     gets updated.
 
 ## 8.4.2 - GetGeom( )
-Most of the proxies have a function called `GetGeom` or `GetGeometry` or `RequestGeometry`, or words to that effect. What these functions do is tell the proxy retrieve information about the device, usually its size and pose (relative to the robot). The proxies don't know this by default since this information is specific to the robot or the Player/Stage robot model. If your code needs to know this kind of information about a device then the proxy must run this command first.
+Most of the proxies have a function called `GetGeom` or `GetGeometry` or
+`RequestGeometry`, or words to that effect. What these functions do is tell
+the proxy to retrieve information about the device, usually its size and pose
+(relative to the robot). The proxies don't know this by default since this
+information is specific to the robot or the Player/Stage robot model. If
+your code needs to know this kind of information about a device then the
+proxy must run this command first.
 
 # 8.5 Case Study 1: Using Python for a Trash-Zapping Robot
 
-To demonstrate how to write code to control a Player device or Player/Stage
-simulation we will use the example robot "Bigbob" developed in
-[Section 3.2.2 - An Example Robot](WORLDFILES.md#322-an-example-robot)
-and
-[Section 4.2 - Putting the Configuration File Together](CFGFILES.md#42-putting-the-configuration-file-together)) 
-which collects
-oranges and juice cartons from a factory floor. In previous sections we
-have developed the Stage model for this robot and its environment and the
-configuration file to control it. Now we can begin to put everything
-together to create a working simulation of this robot.
-
-## 8.5.1 The Control Architecture 
-To zap rubbish we have three basic behaviours: 
-
-* **Wander**: to search for rubbish. 
-* **Move to item**: for when an item is spotted and the robot wants to zap it
-* **Collect item**: for dealing with zapping items.
-
-The robot will also avoid obstacles but once this is done it will switch
-back to its previous behaviour. The control will follow the state
-transitions shown in Figure 8.7.
-
-<!--- Figure --->
-| |
-| :---------------:| 
-| ![Figure 8.7](pics/coding/arch_structureOA.png) |
-| Figure 8.7: The state transitions that the Bigbob rubbish zapping robot will follow. |
-
-
-## 8.5.2 - Beginning the Code 
-
-In [Section 8.2 - Connecting to Server](#82-connecting-to-the-server-and-proxies-with-your-code) we discussed how to connect to the Player server and proxies attached to the server, and developed the following code:
-```
-from playercpp import *
-
-# Create proxies for Client, Sonar, Tooth, Laser, Position2d
-robot = PlayerClient("localhost")
-p2dProxy = Position2dProxy(robot,0)
-sonarProxy = RangerProxy(robot,0)
-blobProxy = BlobfinderProxy(robot,0)
-laserProxy = RangerProxy(robot,1)
-
-# some control code
-return
-```
-Using our knowledge of the proxies discussed in 
-[Section 6.3 - Interacting with Proxies](#63-interacting-with-proxies) we can build controlling code on top of this basic code. 
-Firstly, it is good practice to enable the motors and request the geometry for all the proxies. This means that the robot will move and that if we need to know about the sensing devices the proxies will have that information available.
-```
-# enable motors
-p2dProxy.SetMotorEnable(1);
-
-# request geometries
-p2dProxy.RequestGeom()
-sonarProxy.RequestGeom()
-laserProxy.RequestGeom()
-laserProxy.RequestConfigure()
-# blobfinder doesn't have geometry
-```
-
-Once things are initialised we can enter the main control loop. At this point we should tell the robot to read in data from its devices to the proxies.
-```
-while(true):
-      robot.Read();
-      # control code
-```
-
-## 8.5.3 - Wander
-
-Let's say that Bigbob's maximum speed is 1 metre/second and it can turn 90
-degrees a second. We will write a small subfunction to randomly assign forward and turning speeds between 0 and the maximum speeds.
-```
-void Wander(double *forwardSpeed, double *turnSpeed)
-{
-      int maxSpeed = 1;
-      int maxTurn = 90;
-      double fspeed, tspeed;
-	
-      //fspeed is between 0 and 10
-      fspeed = rand()%11;
-      //(fspeed/10) is between 0 and 1
-      fspeed = (fspeed/10)*maxSpeed;
-	
-      tspeed = rand()%(2*maxTurn);
-      tspeed = tspeed-maxTurn;
-      //tspeed is between -maxTurn and +maxTurn
-	
-      *forwardSpeed = fspeed;
-      *turnSpeed = tspeed;
-} 
-```
-In the control loop we include a call to this function and then set the resulting speeds to the motors.
-```
-while(true)
-{		
-      // read from the proxies
-      robot.Read();
-
-      //wander
-      Wander(&forwardSpeed, &turnSpeed);
-
-      //set motors
-      p2dProxy.SetSpeed(forwardSpeed, dtor(turnSpeed));
-}
-```
-The `dtor()` function is a Player function that turns a number in degrees into a number in radians. Our calculations have been done in degrees but `SetSpeed` requires radians, so this function is used to convert between the two.
-At present the motors are being updated every time this control loop
-executes, and this leads to some erratic behaviour from the robot. Using
-the `sleep()` command we will tell the control loop to wait one
-second between each execution. 
-`sleep()` is a standard C function and is included in
-the `unistd.h` header. 
-At this point we should also seed the random
-number generator with the current time so that the wander behaviour isn't
-exactly the same each time. For the sleep command we will need to include
-`unistd.h` and to seed the random number generator with the current
-system time we will need to include `time.h`.  
-```
-#include <stdio.h>
-#include <unistd.h>
-#include <time.h>
-#include <libplayerc++/playerc++.h>
-
-void Wander(double *forwardSpeed, double *turnSpeed)
-{
-      //wander code...
-} 
-
-int main(int argc, char *argv[])
-{	
-      /*need to do this line in c++ only*/
-      using namespace PlayerCc;
-
-      //connect to proxies
-      double forwardSpeed, turnSpeed;
-	
-      srand(time(NULL));
-	
-      //enable motors
-      //request geometries
-	
-      while(true)
-      {		
-            // read from the proxies
-            robot.Read();
-
-            //wander
-            Wander(&forwardSpeed, &turnSpeed);
-		
-            //set motors
-            p2dProxy.SetSpeed(forwardSpeed, dtor(turnSpeed));
-            sleep(1);
-      }
-}
-```
-
-## 8.5.4 Obstacle Avoidance
-Now we need to write a subfunction that checks the sonars for any obstacles and amends the motor speeds accordingly.
-```
-void AvoidObstacles(double *forwardSpeed, double *turnSpeed, 
-      RangerProxy &sp)
-{
-      //will avoid obstacles closer than 40cm
-      double avoidDistance = 0.4;
-      //will turn away at 60 degrees/sec
-      int avoidTurnSpeed = 60;
-      
-      //left corner is sonar no. 2
-      //right corner is sonar no. 3
-      if(sp[2] < avoidDistance)
-      {
-            *forwardSpeed = 0;
-            //turn right
-            *turnSpeed = (-1)*avoidTurnSpeed;
-            return;
-      }
-      else if(sp[3] < avoidDistance)
-      {
-            *forwardSpeed = 0;
-            //turn left
-            *turnSpeed = avoidTurnSpeed;
-            return;
-      }
-      else if( (sp[0] < avoidDistance) && \
-               (sp[1] < avoidDistance))
-      {
-            //back off a little bit
-            *forwardSpeed = -0.2;
-            *turnSpeed = avoidTurnSpeed;  
-            return;
-      }
-      
-      return; //do nothing
-}
-```
-This is a very basic obstacle avoidance subfunction will update the motor speeds only if there is an obstacle to avoid. If we call this function just before sending data to the motors then it will overwrite any other behaviours so that the obstacle will be avoided. Once the obstacle is no longer in the way then the robot will continue as it was, this will allow us to transition from any behaviour into obstacle avoidance and then back again, as per the requirement of our control structure. All we need to do now is call this function in our control loop:
-```
-while(true)
-{		
-    // read from the proxies
-    robot.Read();
-		
-    //wander
-    Wander(&forwardSpeed, &turnSpeed);
-		
-    //avoid obstacles
-    AvoidObstacles(&forwardSpeed, &turnSpeed, sonarProxy);
-		
-    //set motors
-    p2dProxy.SetSpeed(forwardSpeed, dtor(turnSpeed));
-    sleep(1);
-}
-```
-
-## 8.4.5 Move To Item
-For this state we want the robot to move towards a blob that it has spotted. There may be several blobs in its view at once, so we'll tell the robot to move to the largest one because it's probably the closest to the robot. The following subfunction finds the largest blob and turns the robot so that the blob's centre is near the centre of the image. The robot will then move towards the blob.
-```
-void MoveToItem(double *forwardSpeed, double *turnSpeed, 
-      BlobfinderProxy &bfp)
-{
-      int i, centre;
-      //how many blobs are there?
-      int noBlobs = bfp.GetCount();
-      playerc_blobfinder_blob_t blob;
-      int turningSpeed = 10;
-      
-      /*number of pixels away from the image centre a blob
-      can be, to be in front of the robot. This is 
-      essentially the margin of error.*/
-      int margin = 10;
-
-      //find the largest blob      
-      int biggestBlobArea = 0;
-      int biggestBlob = 0;
-      
-      for(i=0; i<noBlobs; i++)
-      {
-            //get blob from proxy
-            playerc_blobfinder_blob_t currBlob = bfp[i];
-            
-            if( abs((int)currBlob.area) > biggestBlobArea)
-            {
-                  biggestBlob = i;
-                  biggestBlobArea = currBlob.area;
-            }
-      }
-      blob = bfp[biggestBlob];
-            
-      // find centre of image
-      centre = bfp.GetWidth()/2;
-      
-      //adjust turn to centre the blob in image
-      /*if the blob's centre is within some margin of the image 
-      centre then move forwards, otherwise turn so that it is 
-      centred. */
-      //blob to the left of centre
-      if(blob.x < centre-margin)
-      {
-            *forwardSpeed = 0;
-            //turn left
-            *turnSpeed = turningSpeed;
-      }
-      //blob to the right of centre
-      else if(blob.x > centre+margin)
-      {
-            *forwardSpeed = 0;
-            //turn right
-            *turnSpeed = -turningSpeed;
-      }
-      //otherwise go straight ahead
-      else
-      {
-            *forwardSpeed = 0.5;
-            *turnSpeed = 0;      
-      }
-      
-      return;
-}
-```
-
-We want the robot to transition to this state whenever an item is seen, so we put a conditional statement in our control loop like so:
-```
-if(blobProxy.GetCount() == 0)
-{
-      //wander
-      Wander(&forwardSpeed, &turnSpeed);
-}
-else
-{
-      //move towards the item
-      MoveToItem(&forwardSpeed, &turnSpeed, blobProxy);
-}
-```
-
-## 8.5.6 Collect Item 
-This behaviour will be the most difficult to code because Stage doesn't
-support pushable objects (the required physics is far too complex), what
-happens instead is that the robot runs over the object and just jostles it
-a bit.  As a work-around to this problem we will have to somehow find out
-which item is between Bigbob's teeth so that we can find its "name" and
-then change that item's pose (for which we need the item's name) so that it
-is no longer in the simulation. In essence, instead of having our robot eat
-rubbish and store it within its body, what we are doing is making the laser
-zap the rubbish out of existence.
-
-We can find the name of an item between Bigbob's teeth by cross referencing the robot's pose with the poses of the items in the world to find out which item is nearest the robot's laser. The first step is to create a list of all the items in the world, their names and their poses at initialisation. Since we know the names of the items are "orange1" to "orange4" and "carton1" to "carton4", we can find their poses with a simple call to a simulation proxy. We'll have to connect to the simulation proxy with our code first using the line `SimulationProxy simProxy(&robot,0);`, then we can access this information and put it into a struct.
-```
-struct Item
-{
-      char name[16];
-      double x;
-      double y;
-}typedef item_t;
-```
-We can populate the structure with information using the following code:
-```
-item_t itemList[8];
-
-void RefreshItemList(item_t *itemList, SimulationProxy &simProxy)
-{
-      int i;
-      	
-      //get the poses of the oranges
-      for(i=0;i<4;i++)
-      {
-            char orangeStr[] = "orange%d";
-            sprintf(itemList[i].name, orangeStr, i+1);
-            double dummy;  //dummy variable, don't need yaws.
-            simProxy.GetPose2d(itemList[i].name, \
-                  itemList[i].x, itemList[i].y, dummy);
-      }
-      	
-      //get the poses of the cartons
-      for(i=4;i<8;i++)
-      {
-            char cartonStr[] = "carton%d";
-            sprintf(itemList[i].name, cartonStr, i-3);
-            double dummy;  //dummy variable, don't need yaws.
-            simProxy.GetPose2d(itemList[i].name, \
-                  itemList[i].x, itemList[i].y, dummy);
-      }
-      
-      return;
-}
-```
-Here we are making a string of the item names, for example orange1 and storing that in the item's name. We then use this string as an input into the `GetPose2d` function so that we can also get the item's location in the simulation.
-
-Next we can begin the "Collect Item" behaviour, which will be triggered
-by something breaking the laser beam. When this happens we will check the
-area around Bigbob's teeth, as indicated by Figure 8.8.   We know the
-distance from the centre of this search circle to Bigbob's origin (0.625m)
-and the radius of the search circle (0.375m), we can get the robot's exact
-pose with the following code.  
-```
-double x, y, yaw;
-simProxy.GetPose2d("bob1", x, y, yaw);
-```
-Cross referencing the robot's position with the item positions is a matter
-of trigonometry, so isn't particularly relevant to a manual on Player/Stage. We
-won't reproduce the code here, but the full and final code developed for
-the Bigbob rubbish zapping robot is included in appendix D. The method
-we used is to find the Euclidian distance of the items to the circle
-centre, and the smallest distance is the item we want to destroy. We made a
-subfunction called `FindItem` that returns the index of the item to be
-destroyed.
-(We could also equip BigBob with a gripper, and call `gripper.close()`, and haul the trash somewhere else to drop it off.  See
-[GripperProxy](#gripperproxy) for more details, and `bigbob11` for an
-example.)
-
-<!--- Figure --->
-| |
-| :---------------:| 
-| ![Figure 8.8](pics/coding/bigbob_radius.png) |
-| Figure 8.8: Where to look for items which may have passed through Bigbob's laser. |
-
-Now that we can find the item to destroy it's fairly simple to trigger our subfunction when the laser is broken so we can find and destroy an item.
-```
-if(laserProxy[90] < 0.25)
-{
-      int destroyThis;
-
-      /*first param is the list of items in the world
-      second is length of this list
-      third parameter is the simulation proxy with 
-      the pose information in it*/
-      destroyThis = FindItem(itemList, 8, simProxy);
- 
-      //move it out of the simulation
-      simProxy.SetPose2d(itemList[destroyThis].name, -10, -10, 0);
-      RefreshItemList(itemList, simProxy);
-}
-```
-The laser has 180 samples, so sample number 90 is the one which is
-perpendicular to Bigbob's teeth. This point returns a maximum of 0.25, so
-if its range was to fall below this then something has passed through the
-laser beam. We then find the item closest to the robot's teeth and move
-that item to coordinate *(-10, -10)* so it is no longer visible or
-accessible.
-
-Finally we have a working simulation of a rubbish zapping robot! 
-The code comprises the source `<source_code>/Ch8.5/bigbob.py`, 
-the simulation world `<source_code>/Ch8.5/bigbob.world`, and 
-configuration file `<source_code>/Ch8.5/bigbob.cfg`.
-
-#### TRY IT OUT (bigbob)
-This example shows the final code for the trash-zapping robot.
-Read through the code before executing.  
-```tiobox
-> cd <source_code>/Ch8.5
-> player bigbob.cfg &
-> python bigbob.py
-```
+This case study is not yet ported to python, due to the inability to access data
+within the blobdata structure.
 
 # 8.6 Case Study 2: Simulating Multiple Robots
 
@@ -974,8 +583,12 @@ bigbob
 	color "yellow"
 )
 ```
+
+## 8.6.1 - Each robot on it's own port
+
 If there are multiple robots in the simulation, the standard practice is to
-put each robot on its own port (see [Device Address](CFGFILES.md#sec_ConfigurationFile_DeviceAddress)). To implement this in the configuration file we need to tell Player which port to find our second robot on:
+put each robot on its own port (see [Section 4.1 - Device Address](#41-device-addresses). To implement this in the configuration file
+we need to tell Player which port to find our second robot on:
 ```
 driver( name "stage" 
         provides ["6665:position2d:0" "6665:ranger:0"
@@ -992,15 +605,17 @@ If you plan on simulating a large number of robots then it is probably worth wri
 When Player/Stage is started, the Player server automatically connects to
 all the ports used in your simulation and you control the robots separately with different PlayerClient objects in your code. For instance:
 ```
-//first robot
-PlayerClient robot1("localhost", 6665);
-Position2dProxy p2dprox1(&robot1,0);
-RangerProxy sprox1(&robot1,0);
+# first robot
+robot = PlayerClient("localhost",6665);
+sp = RangerProxy(robot,0);
+lp = RangerProxy(robot,1);
+pp = Position2dProxy(robot,0);
 
-//second robot
-PlayerClient robot2("localhost", 6666);
-Position2dProxy p2dprox2(&robot2,0);
-RangerProxy sprox2(&robot2,0);
+# second robot
+robot2 = PlayerClient("localhost",6666);
+sp2 = RangerProxy(robot2,0);
+lp2 = RangerProxy(robot2,1);
+pp2 = Position2dProxy(robot2,0);
 ```
 Each Player Client represents a robot, this is why when you connect to a proxy
 the PlayerClient is a constructor parameter. Each robot has a proxy for
@@ -1018,11 +633,23 @@ robot (obviously the robot's port number would need to be a
 parameter otherwise they'll all connect to the same port and consequently
 the same robot.) and all the simulated robots will run the same code.
 
+#### TRY IT OUT (bigbob2)
+This example shows the final code for two trash-zapping robots.
+Read through the code before executing.  
+```tiobox
+> cd <source_code>/Ch8.6
+> player bigbob2a.cfg &
+> make bigbob2a
+> ./bigbob2a
+```
+
+## 8.6.2 - Each interface on it's own index
+
 An alternative to using a port for each robot is to use the same port but a
 different index. 
 
 For example, the Bigbob robot uses interfaces and indexes: position2d:0,
-ranger:0, blobfinder:0 and ranger:0. If we configured two Bigbob robots to
+ranger:0, blobfinder:0 and ranger:1. If we configured two Bigbob robots to
 use the same port but a different index our configuration file would be
 like this: 
 ```
@@ -1038,20 +665,23 @@ driver( name "stage"
 ```
 In our code we could then establish the proxies using only one PlayerClient:
 ```
-PlayerClient robot("localhost", 6665);
+robot = PlayerClient("localhost",6665);
+sp = RangerProxy(robot,0);
+lp = RangerProxy(robot,1);
+pp = Position2dProxy(robot,0);
 
-//first robot
-Position2dProxy p2dprox1(&robot,0);
-RangerProxy sprox1(&robot,0);
-
-//second robot
-Position2dProxy p2dprox2(&robot,1);
-RangerProxy sprox2(&robot,2);
-
-//shared Simultion proxy...
-SimulationProxy sim(&robot,0);
+sp2 = RangerProxy(robot,2);
+lp2 = RangerProxy(robot,3);
+pp2 = Position2dProxy(robot,1);
 ```
-The main advantage of configuring the robot swarm this way is that it
-allows us to only have one simulation proxy which is used by all robots.
-This is good since there is only ever one simulation window that you can
-interact with and so multiple simulation proxies are unnecessary.
+
+#### TRY IT OUT (bigbob2, unique indices)
+This example shows the final code for the trash-zapping robot.
+Read through the code before executing.  
+```tiobox
+> cd <source_code>/Ch8.6
+> player bigbob2b.cfg &
+> make bigbob2b
+> ./bigbob2b
+```
+

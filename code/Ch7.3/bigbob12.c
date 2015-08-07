@@ -46,8 +46,6 @@ int main(int argc, char *argv[]) {
   		printf("bob1 is at Pose = %.2f,%.2f,%.2f)\n",x,y,a);
     }
 
-    return 0;
-
   playerc_position2d_set_cmd_vel(pp, 0.0, 0.0, 0, 1);
 
   /* Shutdown */

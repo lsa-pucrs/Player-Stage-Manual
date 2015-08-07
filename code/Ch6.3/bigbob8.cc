@@ -1,5 +1,4 @@
-/* Simple C++ client example.
- * Based on example0.cc from player distribution
+/* bigbob8.cc - demo GetSetSpeed and GetPositions
  * K. Nickels 7/24/13
  */
 
