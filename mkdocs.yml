@@ -1,6 +1,6 @@
 site_name: How to use Player/Stage
 repo_url: https://github.com/NickelsLab/Player-Stage-Manual
-#theme: readthedocs
+theme: mkdocs
 
 pages:
 - Home: README.md
