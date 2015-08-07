@@ -1,3 +1,6 @@
 site_name: How to use Player/Stage
 pages:
 - Home : index.md
+- 'Ch1 - Introduction': 'INTRO.md'
+
+
