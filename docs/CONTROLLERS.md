@@ -59,7 +59,7 @@ a simulated robot.
 We will start in [Chapter 6](CONTROLLER_CPP.md) by using C++ since it's
 pretty general.  Then, we'll cover C controllers in 
 [Chapter 7](CONTROLLER_C.md), and Python controllers in 
-[Chapter 8](CONTROLLER_PY.md) and [Chapter 9](CONTROLLER_PYC.md)
+[Chapter 8](CONTROLLER_PYCPP.md) and [Chapter 9](CONTROLLER_PYC.md)
 
 The process of writing Player code is mostly the same for each different
 language though. The libplayerc and libplayercpp proxy functions have
@@ -86,3 +86,4 @@ for some reason your robot breaks and a certain function no longer works
 you only have to change part of a file instead of searching through all
 your code for places where Player functions have been used.
 
+![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

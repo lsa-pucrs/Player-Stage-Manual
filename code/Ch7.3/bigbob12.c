@@ -1,5 +1,5 @@
-/* Example 'bigbob12.c' - show use of get/set pose
- * K. Nickels 7/2/15
+/* bigbob12.c - demo simulationproxy interface (GetSetPose)
+ * K. Nickels 7/24/13
  */
 
 #include <stdio.h>
@@ -45,8 +45,6 @@ int main(int argc, char *argv[]) {
 		playerc_simulation_get_pose2d(sp,(char *)"bob1",&x,&y,&a);
   		printf("bob1 is at Pose = %.2f,%.2f,%.2f)\n",x,y,a);
     }
-
-    return 0;
 
   playerc_position2d_set_cmd_vel(pp, 0.0, 0.0, 0, 1);
 

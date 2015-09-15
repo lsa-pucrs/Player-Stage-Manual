@@ -67,15 +67,17 @@ This is only useful if your simulation has more than one robot in and you
 need your code to connect to both robots. So if you gave your first robot
 port 6665 and the second one 6666 (like in the example of
 [Section 4.2 - Putting the Configuration File Together](CFGFILES.md#42-putting-the-configuration-file-together)) then you would need two
-PlayerClients, one connected to each robot, and you would do this with the
+player clients, one connected to each robot, and you would do this with the
 following code: 
 ```
 client1 = playerc_client_create(NULL, "localhost", 6665);
 client2 = playerc_client_create(NULL, "localhost", 6666);
 ```
-If you are only using one robot and in your .cfg file you said that it would operate on port 6665 then the port parameter to the PlayerClient class is not needed. 
+If you are only using one robot and in your .cfg file you said that it
+would operate on port 6665 then the port parameter to the player client
+constructor is not needed. 
 
-Once we have established a PlayerClient we should connect our code to the
+Once we have established a player client we should connect our code to the
 device proxies so that we can exchange information with them. Which proxies
 you can connect your code to is dependent on what you have put in your
 configuration file. For instance if your configuration file says your robot
@@ -144,7 +146,7 @@ driver
       model "bob1" 
 )
 ```
-To set up a playerc_client and then connect to proxies on that server we
+To set up a player client and then connect to proxies on that server we
 can use principles discussed in this section to develop the following code:
 ```
 #include <stdio.h>
@@ -210,7 +212,7 @@ last for car-like drives.
 * `playerc_position2d_set_cmd_vel_head (playerc_position2d_t *device,
   double XSpeed, double YSpeed, double YawHeading, int state)`
 * `playerc_position2d_set_cmd_car (playerc_position2d_t *device, double
-  XSpeed, *double SteerAngle)`
+  XSpeed, double SteerAngle)`
 
 <!--- Figure --->
 | |
@@ -248,7 +250,7 @@ the relevant fields in the `playerc_position2d_t` strucure.
 
 ### 7.3.1.3 - Get_Pos ( )
 Again, in playerc these fields are read directly from the `playerc_position2d_t`
-strucure.
+structure.
 
 This allows you to monitor where the robot thinks it is. Coordinate values
 are given relative to its starting point, and yaws are relative to its
@@ -322,9 +324,9 @@ Angles are given with reference to the laser's centre front (see Figure
           index `ranges_count`.
           For a multiple-sensor device, the `ranger_number` is
           given by the order in which you included the sensor.
-    * `minangle`: gives the minimum angle covered by a ranger sensor.
+    * `min_angle`: gives the minimum angle covered by a ranger sensor.
             Only makes sense for a single-sensor device.
-    * `maxangle`: gives the maximum angle covered by a
+    * `max_angle`: gives the maximum angle covered by a
         ranger sensor.  Only makes sense for a single-sensor device.
     * `bearings[ranger_number]`: scan bearings in the XY plane (See Figure
       7.4)
@@ -574,7 +576,7 @@ before some large data structures (such as a camera image) gets updated.
 ## 7.4.2 - getgeom()
 Most of the proxies have a function called `get_geom` or `get_geometry` or
 `request_geometry`, or words to that effect. What these functions do is tell
-the proxy retrieve information about the device, usually its size and pose
+the proxy to retrieve information about the device, usually its size and pose
 (relative to the robot). The proxies don't know this by default since this
 information is specific to the robot or the Player/Stage robot model. If your
 code needs to know this kind of information about a device then the proxy must
@@ -1072,7 +1074,9 @@ driver( name "stage"
 ```
 If you plan on simulating a large number of robots then it is probably worth writing a script to generate the world and configuration files.
 
-When Player/Stage is started, the Player server automatically connects to all the used ports in your simulation and you control the robots separately with different PlayerClient objects in your code. For instance:
+When Player/Stage is started, the Player server automatically connects to
+all the used ports in your simulation and you control the robots separately
+with different player client objects in your code. For instance:
 ```
 	  /* First Robot */
 	  playerc_client_t *robot;
@@ -1120,13 +1124,13 @@ When Player/Stage is started, the Player server automatically connects to all th
 	  if (playerc_ranger_subscribe(laserProxy2, PLAYER_OPEN_MODE)) return -1;
 ```
 
-Each Player Client represents a robot, this is why when you connect to a proxy
-the PlayerClient is a constructor parameter. Each robot has a proxy for
+Each player client represents a robot, this is why when you connect to a proxy
+the player client is a constructor parameter. Each robot has a proxy for
 each of its devices, no robots share a proxy, so it is important that your
 code connects to every proxy of every robot in order to read the sensor
 information.
 
-How you handle the extra PlayerClients and proxies is dependent on the
+How you handle the extra player client and proxies is dependent on the
 scale of the simulation and your own personal coding preferences. It's a
 good idea, if there's more than maybe 2 robots in the simulation, to make a
 robot class which deals with connecting to proxies and the server, and
@@ -1166,7 +1170,8 @@ driver( name "stage"
         "6665:blobfinder:1" "6665:ranger:3"] 
         model "bob2" )
 ```
-In our code we could then establish the proxies using only one PlayerClient:
+In our code we could then establish the proxies using only one player
+client:
 ```
 	  /* Create a client and connect it to the server. */
 	  playerc_client_t *robot;
@@ -1215,3 +1220,4 @@ interact with and so multiple simulation proxies are unnecessary.
 > ./bigbob2b
 ```
 
+![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

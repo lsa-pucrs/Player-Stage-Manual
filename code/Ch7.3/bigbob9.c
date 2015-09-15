@@ -1,5 +1,4 @@
-/* Simple C client example.
- * Based on simple.c from player distribution
+/* bigbob9.c - demo ranger interface
  * K. Nickels 6/5/14
  */
 
@@ -30,6 +29,8 @@ int main(int argc, char *argv[]) {
   playerc_ranger_get_geom(toothProxy);
   playerc_ranger_get_geom(laserProxy);
   playerc_client_read(robot);
+
+  printf("max laser range: %.3f\n",laserProxy->max_range);
 
   printf("%d sonar ranges: ",sonarProxy->ranges_count);
   for(int i=0;i<sonarProxy->ranges_count-1;i++) 

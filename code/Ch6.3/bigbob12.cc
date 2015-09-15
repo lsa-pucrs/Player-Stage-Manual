@@ -1,5 +1,4 @@
-/* Simple C++ client example.
- * Based on example0.cc from player distribution
+/* bigbob12.cc - demo simulationproxy interface (GetSetPose)
  * K. Nickels 7/24/13
  */
 
