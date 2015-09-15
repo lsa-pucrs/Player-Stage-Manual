@@ -63,20 +63,20 @@ typeset in monospace font. For example,
 means to go to a terminal window and type the command given (`ls`), without
 the `>` character, then hit return.
 
-In many cases, you'll need to run first command (`player
-configfile.cfg`) in the backgroun, since it doesn't quit till player is
+In many cases, you'll need to run the first command (`player configfile.cfg`) in the background, since it doesn't quit till player is
 done.  To do this, you add an ampersand (`&`) after the command.  So if you
 type `player configfile.cfg` in a terminal, it will appear to freeze.  If
 you however type `player configfile.cfg &` into the terminal, it will start
-up player and return.  Player will print information and debugging messages
-to your terminal!
+up player and return.  Player will however print information and debugging
+messages to your terminal, which can be a bit confusing at times.
 
 When you use files, you should examine the files to see how they are
 working, just running the examples will not teach you (as) much!
 
 ## 1.3 - TRY IT OUT (Preparation)
 
-* If you haven't already, download the sample code from [here](http://github.com/NickelsLab/Player-Stage-Manual/archive/master.zip) 
+* If you haven't already, download the sample code from 
+ [http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip](http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip) 
 * Next, you'll need to extract the sample code.  To do this, open a
  terminal and cd to the directory where you put the file
  `master.zip`, then extract using zip.  Yes, there are
@@ -95,9 +95,9 @@ working, just running the examples will not teach you (as) much!
 > ls
 ```
 
-At this point, you should see nine directories, `Ch3 Ch4 Ch5.1 Ch5.2 Ch5.3 Ch6.2 Ch6.3, Ch7.1, Ch7.2, Ch7.3`, which contain the code examples for the
-respective chapters, and one, `bitmaps`, that has pictures used in several
-different examples.
+At this point, you should see one directory for each setion of this manual,
+which contain the code examples for the respective chapters, and one,
+`bitmaps`, that has pictures used in several different examples.
 
 ## 1.4 - TRY IT OUT
 First we will run a world and configuration file that comes bundled with
@@ -114,3 +114,4 @@ Assuming Player/Stage is installed properly you should now have a window open wh
 
 ![The simple.cfg world after being run](pics/simpleworld.png)
 
+![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)
