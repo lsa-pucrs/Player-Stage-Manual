@@ -23,20 +23,16 @@ help from the Player community at
 
 This edition of the manual uses the development versions of Player and
 Stage.  They can be found at 
-[https://github.com/playerproject/player.git]
-(https://github.com/playerproject/player.git)
+[https://github.com/playerproject/player.git](https://github.com/playerproject/player.git)
 and
 at 
-[https://github.com/rtv/Stage.git]
-(https://github.com/rtv/Stage.git)
+[https://github.com/rtv/Stage.git](https://github.com/rtv/Stage.git)
 .  The build process for player and
 stage is outside the scope of this manual - excellent instructions can be
 found at
-[http://playerstage.sourceforge.net/doc/Player-3.0.2/player/install.html] 
-(http://playerstage.sourceforge.net/doc/Player-3.0.2/player/install.html)
+[http://playerstage.sourceforge.net/doc/Player-3.0.2/player/install.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/install.html)
 and
-[http://rtv.github.io/Stage/install.html]
-(http://rtv.github.io/Stage/install.html)
+[http://rtv.github.io/Stage/install.html](http://rtv.github.io/Stage/install.html)
 
 There are only minor changes from v4.0.0 to this version of the manaul.
 Other versions of this manual are available at
