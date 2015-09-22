@@ -27,7 +27,7 @@ previous edition of this manual is now out of date. They are available at
 
 * [v2.0.0 - Using player-3.0.2 and stage-3.2.x (PDF)](http://player-stage-manual.readthedocs.org/en/v2.0.0/)
 * [v4.0.0 - Using player-3.0.2 and stage-4.1.1 (PDF)](http://player-stage-manual.readthedocs.org/en/v4.0.0/)
-* [latest - Using very latest code from github.com - player-3.0.2-svn and Stage from (RTD)](http://player-stage-manual-readthedocs.org/en/latest/)
+* [latest - Using very latest code from github.com - player-3.0.2-svn and Stage from (RTD)](http://player-stage-manual.readthedocs.org/en/latest/)
 
 
 # TABLE OF CONTENTS
