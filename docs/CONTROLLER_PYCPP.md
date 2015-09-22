@@ -361,8 +361,9 @@ contains the following fields (see Figure 6.6 for illustration):
     Stage 4.1.1, there is a bug with respect to the area.  It is
     computed as an `int`, but return as an `unsigned int`.  In order to use
     it, you must explicitly cast it as an int (`(int)area`).  See
-    (http://sourceforge.net/p/playerstage/bugs/362/) and/or
-    (https://github.com/rtv/Stage/issues/41) for the details.)
+    [http://sourceforge.net/p/playerstage/bugs/362/](http://sourceforge.net/p/playerstage/bugs/362/) 
+	and/or
+    [https://github.com/rtv/Stage/issues/41](https://github.com/rtv/Stage/issues/41) for the details.)
 * `x`: The horizontal coordinate of the geometric centre of the
   blob's bounding box
 * `y`: The vertical coordinate of the geometric centre of the
