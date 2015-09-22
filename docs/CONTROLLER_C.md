@@ -1220,4 +1220,3 @@ interact with and so multiple simulation proxies are unnecessary.
 > ./bigbob2b
 ```
 
-![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

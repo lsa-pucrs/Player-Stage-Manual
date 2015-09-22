@@ -82,4 +82,3 @@ address instead of ``localhost''. The specifics of writing a device
 address in this way will be described in 
 [Chapter 4](CFGFILES.md)
 
-![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

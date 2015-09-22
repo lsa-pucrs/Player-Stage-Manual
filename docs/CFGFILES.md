@@ -284,4 +284,3 @@ To drive the robots around, you select Devices/Position2d/Subscribe, then
 select Devices/Position2d/Command in a playerv window, then drag the red
 bulls-eye around.
 
-![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

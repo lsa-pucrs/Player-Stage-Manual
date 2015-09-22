@@ -1089,4 +1089,3 @@ simulation. Figure 3.15 shows the populated Player/Stage simulation.
 | ![Figure 3.15](pics/oranges_box/final_robot_and_stuff.png) |
 | Figure 3.15: The Bigbob robot placed in the simulation along with junk for it to pick up. |
 
-![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

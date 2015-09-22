@@ -86,4 +86,3 @@ for some reason your robot breaks and a certain function no longer works
 you only have to change part of a file instead of searching through all
 your code for places where Player functions have been used.
 
-![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)

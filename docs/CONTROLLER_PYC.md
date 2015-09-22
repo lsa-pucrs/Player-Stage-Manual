@@ -718,4 +718,3 @@ This is good since there is only ever one simulation window that you can
 interact with and so multiple simulation proxies are unnecessary and
 confusing.
 
-![img](http://nojsstats.appspot.com/UA-66082425-1/player-stage-manual.readthedocs.org)
