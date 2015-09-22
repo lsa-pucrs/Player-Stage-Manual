@@ -37,10 +37,10 @@ and
 There are only minor changes from v4.0.0 to this version of the manaul.
 Other versions of this manual are available at
 
-* [v2.0.0 - Using player-3.0.2 and stage-3.2.x (PDF)](http://player-stage-manual-readthedocs.org/en/v2.0.0/)
-* [v4.0.0 - Using player-3.0.2 and stage-4.1.1 (PDF)](http://player-stage-manual-readthedocs.org/en/v4.0.0/)
-* [v4.1.0/stable - Using latest stable releases - player-3.0.2 and * stage-4.1.1](http://player-stage-manual-readthedocs.org/en/stable/)
-* [latest - Using very latest code from github.com - player-3.0.2-svn and Stage from (RTD)](http://player-stage-manual-readthedocs.org/en/latest/)
+* [v2.0.0 - Using player-3.0.2 and stage-3.2.x (PDF)](http://player-stage-manual.readthedocs.org/en/v2.0.0/)
+* [v4.0.0 - Using player-3.0.2 and stage-4.1.1 (PDF)](http://player-stage-manual.readthedocs.org/en/v4.0.0/)
+* [v4.1.0/stable - Using latest stable releases - player-3.0.2 and * stage-4.1.1](http://player-stage-manual.readthedocs.org/en/stable/)
+* [latest - Using very latest code from github.com - player-3.0.2-svn and Stage from (RTD)](http://player-stage-manual.readthedocs.org/en/latest/)
 
 
 # TABLE OF CONTENTS
