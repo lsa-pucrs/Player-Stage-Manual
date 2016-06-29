@@ -22,7 +22,7 @@ for each.
 ## 8.1.1 - Setting up `playercpp.py` interface
 
 The C++ bindings are NOT made by default in player.  You'll need to
-configure and compile player locally to make these - how to do this is well beyond the scope of this manual, but a step-by-step procedure can be found [here.](http://sites.udel.edu/robotics/setting-up-player-and-stage-for-ubuntu-10-04/)
+configure and compile player locally to make these - how to do this is well beyond the scope of this manual, but an overall procedure can be found [here.](http://playerstage.sourceforge.net/doc/Player-cvs/player/install.html)
 
 To see if the bindings are available, and to locate where they are, type
 ```
