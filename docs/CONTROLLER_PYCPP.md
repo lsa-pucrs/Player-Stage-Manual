@@ -267,7 +267,7 @@ ever likely to be moved onto a real robot and the motors are not explicitly
 enabled in your code, then you may end up spending a long time trying to
 work out why your robot is not working.
 
-### 8.3.2 RangerProxy
+## 8.3.2 RangerProxy
 
 A RangerProxy interfaces with any ranger sensor.  
 
