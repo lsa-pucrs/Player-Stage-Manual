@@ -1,5 +1,4 @@
 In this chapter, C++ is used to demonstrate how to write external
-In this chapter, C++ is used as an example of how to write external
 controllers.  Since
 Player interacts with controlling code over network sockets, it's pretty
 easy to control robots (physical or simulated) with other languages as
