@@ -1,10 +1,14 @@
+<!---
+# Chapter 5 - Getting Your Simulation to Run Your Code
+--->
+
 To learn how to write code for Player or Player/Stage it helps to
 understand the basic structure of how Player works. Player uses a
 Server/Client structure in order to pass data and instructions between your
 code and the robot's hardware. Player is a server, and a hardware device.
 Remember, a device is a piece of hardware that uses a driver which conforms
-to an interface. See [Section 2.2 - Interfaces, Drivers, and
-Devices](BASICS.md#22-interfaces-drivers-and-devices).  On the robot is
+to an interface. See [Section 2.3 - Interfaces, Drivers, and
+Devices](BASICS.md#23-interfaces-drivers-and-devices).  On the robot is
 subscribed as a client to the server via a thing called a
 *proxy*. The .cfg file associated with your robot (or your simulation)
 takes care of telling the Player server which devices are attached to it,

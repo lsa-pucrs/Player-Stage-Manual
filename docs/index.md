@@ -1,12 +1,12 @@
 # How to Use Player/Stage
 
-5th Edition
+6th Edition
 
 Using Player 3.0.2 and Stage 4.1.1 (development versions)
 
-Kevin Nickels and Jennifer Owen
+Kevin Nickels, Jennifer Owen, Alexandre Amory
 
-15 September 2015
+2 July 2017
 
 A user manual for the Player/Stage robot simulator.
 
@@ -27,9 +27,7 @@ Stage.  They can be found at
 and
 at 
 [https://github.com/rtv/Stage.git](https://github.com/rtv/Stage.git)
-.  The build process for player and
-stage is outside the scope of this manual - excellent instructions can be
-found at
+.  The build process for player and stage is described in 
 [http://playerstage.sourceforge.net/doc/Player-3.0.2/player/install.html](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/install.html)
 and
 [http://rtv.github.io/Stage/install.html](http://rtv.github.io/Stage/install.html)
@@ -54,8 +52,10 @@ Other versions of this manual are available at
 5. [Controllers (C)](CONTROLLER_C.md)
 5. [Controllers (Py-libplayercpp)](CONTROLLER_PYCPP.md)
 5. [Controllers (Py-libplayerc)](CONTROLLER_PYC.md)
+6. [Building Your Own Drivers (C/C++)](DRIVERS.md)
 
 ### Change Log
+* 3 July 2017 forked by [LSA (Laboratório de Sistemas Autônomos)](lsa.pucrs.br) to include updated instructions for the build process and instruction to create new drivers and interfaces.
 * 15 Sept 2015 forked off development version of manual
 * 7 Aug 2015 released v4.1.0 covering stable versions
 * 30 June 2015 updating markdown for [readthedocs.org](http://readthedocs.org)

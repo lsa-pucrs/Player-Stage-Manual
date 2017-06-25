@@ -1,3 +1,7 @@
+<!---
+# Chapter 3 - Building a World
+--->
+
 ## 3.1 - Building an Empty World </a>
 
 When we tell Player to build a world we only give it
