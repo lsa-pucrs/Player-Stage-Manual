@@ -12,6 +12,8 @@ pages:
 - 'Ch7 - Controllers (C)': 'CONTROLLER_C.md'
 - 'Ch8 - Controllers (Python/playercpp)': 'CONTROLLER_PYCPP.md'
 - 'Ch9 - Controllers (Python/playerc)': 'CONTROLLER_PYC.md'
+- 'Ch10 - Building New an Interface': 'INTERFACES.md'
+- 'Ch11 - Building New a Driver': 'DRIVERS.md'
 
 markdown_extensions:
 - toc:
