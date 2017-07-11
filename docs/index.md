@@ -48,11 +48,12 @@ Other versions of this manual are available at
 3. [Building a World](WORLDFILES.md)
 4. [Writing a Configuration (.cfg) File](CFGFILES.md)
 5. [Getting Your Simulation to Run Your Code](CONTROLLERS.md)
-5. [Controllers (C++)](CONTROLLER_CPP.md)
-5. [Controllers (C)](CONTROLLER_C.md)
-5. [Controllers (Py-libplayercpp)](CONTROLLER_PYCPP.md)
-5. [Controllers (Py-libplayerc)](CONTROLLER_PYC.md)
-6. [Building Your Own Drivers (C/C++)](DRIVERS.md)
+6. [Controllers (C++)](CONTROLLER_CPP.md)
+7. [Controllers (C)](CONTROLLER_C.md)
+8. [Controllers (Py-libplayercpp)](CONTROLLER_PYCPP.md)
+9. [Controllers (Py-libplayerc)](CONTROLLER_PYC.md)
+10. [Building a New Interface (C/C++)](INTERFACES.md)
+11. [Building a New Driver (C/C++)](DRIVERS.md)
 
 ### Change Log
 * 3 July 2017 forked by [LSA (Laboratório de Sistemas Autônomos)](lsa.pucrs.br) to include updated instructions for the build process and instruction to create new drivers and interfaces.

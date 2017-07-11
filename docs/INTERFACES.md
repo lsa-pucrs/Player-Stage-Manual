@@ -1,10 +1,9 @@
 <!---
-# Chapter 10 - Building an Interface
+# Chapter 10 - Building a New Interface
 --->
 
-The previous sections, from 1 to 9, focus on the constrution of a new scenario (world and models) and on the client side controller software.
-However, if you have to build a new interface or device driver for Player, you will only find out-of-date instructions, such as in [Section 2.3 - Interfaces, Drivers, and
-Devices](BASICS.md#23-interfaces-drivers-and-devices). 
+The previous sections, from 1 to 9, focus on the construction of a new scenario (world and models) and the client side controller software.
+However, if you have to build a new interface or device driver for Player, you will only find out-of-date and incomplete instructions. 
 Thus, the motivation of this new section is to reduce effort so that new resources can be built for Player.
 
 ## 10.1 - Definition of a Player Interface
@@ -16,9 +15,9 @@ All Player communication occurs through interfaces, which specify the syntax and
 * [Definition 2](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__tutorial__devices.html).
 A specification of how to interact with a certain class of robotic sensor, actuator, or algorithm. The interface defines the syntax and semantics of all messages that can be exchanged with entities in the same class.
 
-Consider the ranger interface. This interface defines a format in which a generic (vendor independent) range-sensor can return range readings. So it define the data structure of messages exchanged between a client-side controler and a serve-side device driver. This is how Player abstracts the specifics of a hardware module, such as an ranger device. For example, SICK LMS200 device has its own protocol to interface with its hardware, however, when integrate with Player, the Player driver for SICK LMS200 will use the generic vendor independent ranger interface. Thus, the client-side controler software is not aware of the laser ranger brand. 
+Consider the ranger interface. This interface defines a format in which a generic (vendor independent) range sensor can return range readings. So it defines the data structure of messages exchanged between a client-side controller and a serve-side device driver. This is how Player abstracts the specifics of a hardware module, such as a ranger device. For example, SICK LMS200 device has its own protocol to interface with its hardware, however, when integrated with Player, the Player driver for SICK LMS200 will use the generic vendor independent ranger interface. Thus, the client-side controller software is not aware of the laser ranger brand. 
 
-So, when a client-side controler software creates the `sonarProxy` device based on the `RangerProxy`, we are defining that this device obeys the `ranger interface`, sending and receiveing messages according to the datatypes (structs) defined in this interface. For instance, when the `sonarProxy.GetRange(i)` method is executed, the read message has the following format `player_ranger_data_range_t`, defined in the file `libplayerinterface/interfaces/062_ranger.def`. 
+So, when a client-side controller software creates the `sonarProxy` device based on the `RangerProxy`, we are defining that this device obeys the `ranger interface`, sending and receiving messages according to the data types (structs) defined in this interface. For instance, when the `sonarProxy.GetRange(i)` method is executed, the read message has the following format `player_ranger_data_range_t`, defined in the file `libplayerinterface/interfaces/062_ranger.def`. 
 
 ```tiobox
 int main (){
@@ -39,12 +38,12 @@ for (int i=0;i<sonarProxy.GetRangeCount()-1;i++)
 
 ## 10.2 - When to Create a New Interface
 
-It is very unlikely that you have to create a new interface if you are using a conventional robot because Player already has a vast number of [interfaces](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html) for the most used resources in robots. If you do have to define a new interface, please follow the recomended guidelines to maintain future software compatibility and documentation style. 
+It is unlikely that you have to create a new interface if you are using a conventional robot because Player already has a vast number of [interfaces](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html) for the most used resources in robots. If you do have to define a new interface, please follow the recommended guidelines to maintain future software compatibility and documentation style. 
 
 ## 10.3 - How an Interface is Created
 
 
-There is a very brieaf description about adding new interaces at `libplayerinterface/interfaces/ADDING_INTERFACES`. It gives the basic information about interfaces, but it lacks usefull information which were included into this document. Basically, the `ADDING_INTERFACES` says:
+There is a very brief description about adding new interfaces at `libplayerinterface/interfaces/ADDING_INTERFACES`. It gives the basic information about interfaces, but it lacks useful information which were included in this document. The `ADDING_INTERFACES` says:
 
 ```tiobox
 To add a new interface create a new file in this directory.
@@ -68,11 +67,11 @@ When modifying an interface try to avoid renumbering the subtype codes.
 If you remove a subtype just leave a gap, this will aid in version 
 compatibility.
 ```
-There is also an example interface located at `examples\plugins\exampleinterface` which might be usefull for some users, but I think it is quite complex for beginners. 
+There is also an example interface located at `examples\plugins\exampleinterface` which might be useful for some users, but I think it is quite complicated for beginners. 
 
-The ranger interface is quite complex, thus, its not a very adequate example to start with. 
+The ranger interface is also quite complicated. Thus, it's not an adequate example to start with. 
 On the other hand, the speech interface (`libplayerinterface/interfaces/012_speech.def`) is one of the simplest Players interfaces. 
-This interface is a generic interface to any speech syntheziser.  It is defined as:
+This interface is a generic interface to any speech synthesizer.  It is defined as:
 
 ```tiobox
 description {
@@ -99,7 +98,7 @@ typedef struct player_speech_cmd
 
 The speech interface has only one message and one data structure (`player_speech_cmd_t`) carrying the sentence to be spoken by the robot. 
 
-Another interesting interface is the bumber, defined at `libplayerinterface/interfaces/014_bumper.def`: 
+Another interesting interface is the bumper, defined at `libplayerinterface/interfaces/014_bumper.def`: 
 
 ```tiobox
 description {
@@ -156,18 +155,18 @@ typedef struct player_bumper_geom
 The bumper interface has three messages and its respective data type. Note that there are different message parameters in this interface. 
 According to the Player manual, a message is defined as  `message { TYPE, SUBTYPE, SUBTYPE_CODE, DATA_TYPE };`
 The `TYPE` field can be DATA, REQ, CMD. Data is used, for example, to read data out of a sensor, to read the robot's pose, device status, etc.
-REQ is used to query a device, in an request/replay communication format. CMD is mostly used for an actuator to set its state. 
-The `SUBTYPE` and `SUBTYPE_CODE` is used only to differantiate messages of the same TYPE. Finally, the `DATA_TYPE` is the struct used to carry the actual data of the message.
+REQ is used to query a device, in a request/replay communication format. CMD is mostly used for an actuator to set its state. 
+The `SUBTYPE` and `SUBTYPE_CODE` is used only to differentiate messages of the same TYPE. Finally, the `DATA_TYPE` is the struct used to carry the actual data of the message.
 
 ## 10.4 - Creating an Interface
 
-As an example, are are going to create the so called `sound interface`. This interface will send the filename of an audio file so that the robot can play this file. We are assuming that the client side knows the audio files in the robot's computer. No actual audio file is transfered in the message, just the audio filename. 
+As an example, we are are going to create the so called `sound interface`. This interface will send the filename of an audio file so that the robot can play this file. We are assuming that the client side knows the audio files in the robot's computer. No actual audio file is transferred in the message, just the audio filename. 
 
-Looking at the Player [interfaces](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html) list, there is the [audio](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interface__audio.html) interface, but it is not adequate for our purporses since it is much more complex than our specification. For this reason, are are going to create a new interface called **`playsound`**.
+Looking at the Player [interfaces](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html) list, there is the [audio](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interface__audio.html) interface, but it is not adequate for our purposes since it is much more complicated than our specification. For this reason, we are going to create a new interface called **`playsound`**.
 
 ### 10.4.1 - Creating the Message Type
 
-The playsound interface is defined bellow. 
+The playsound interface is defined bellow, and it is located at `<source_code>/Ch10.1`. 
 
 ```tiobox
 description{
@@ -193,7 +192,7 @@ typedef struct player_playsound_cmd
 ```
 
 It has a single message and data type, which is used to send the audio filename to be played at the robot. 
-This file must be saved as `libplayerinterface/interfaces/066_playsound.def`. The number 066 must tbe the last interface number used in the directory `libplayerinterface/interfaces/`.
+This file must be saved as `libplayerinterface/interfaces/066_playsound.def`. The number 066 must be the last interface number used in the directory `libplayerinterface/interfaces/`.
 
 Now we have to edit the `libplayerinterface/CMakeLists.txt` file to compile our new interface. The part of the CMakefile that defines the interface files must change from 
 
@@ -212,11 +211,11 @@ to
                      interfaces/066_playsound.def)
 ```
 
-The next step is to create the new Proxies that use the playsound interface. We are going to call them **PlaySound Proxy**. Two versions are created, one for C (PlayerC) and c++ (PlayerCpp).
+The next step is to create the new Proxies that use the playsound interface. We are going to call them **PlaySound Proxy**. Two versions are created, one for C (PlayerC) and C++ (PlayerCpp).
 
 ### 10.4.2 - Creating the PlayerC Proxy
 
-This file must be defined in `client_libs/libplayerc/dev_playsound.c`. 
+This file, located at `<source_code>/Ch10.1`, must be copied to `client_libs/libplayerc/dev_playsound.c`. 
 
 ```tiobox
 /*
@@ -336,7 +335,7 @@ int playerc_playsound_play(playerc_playsound_t *device, char *filename)
 }
 ```
 
-The next step is to edit the `client_libs/libplayerc/playerc.h` file to define the playsound class. At the end of the file insert the following code
+The next step is to edit the `client_libs/libplayerc/playerc.h` file to define the playsound class. At the end of the file insert the following code:
 
 
 ```tiobox
@@ -398,7 +397,7 @@ including the new proxy file for compilation.
 
 ### 10.4.3 - Creating the PlayerCpp Proxy
 
-This file must be defined in `client_libs/libplayerc++/playsoundproxy.cc`. 
+This file, located at `<source_code>/Ch10.1`, must be copied to `client_libs/libplayerc++/playsoundproxy.cc`. 
 
 ```tiobox
 /*
@@ -491,7 +490,7 @@ void PlaySoundProxy::play(char *filename)
 ```
 
 
-The next step is to edit the `client_libs/libplayerc++/playerc++.h` file to define the playsound class. At the end of the file insert the following code
+The next step is to edit the `client_libs/libplayerc++/playerc++.h` file to define the playsound class. At the end of the file insert the following code:
 
 
 ```tiobox
@@ -518,14 +517,14 @@ class PLAYERCC_EXPORT PlaySoundProxy : public ClientProxy
 };
 ```
 
-At the very end of the same file there is block of << operator such as
+At the very end of the same file, there is block of << operator such as
 
 ```tiobox
    PLAYERCC_EXPORT std::ostream& operator << (std::ostream& os, const PlayerCc::RFIDProxy& c);
    PLAYERCC_EXPORT std::ostream& operator << (std::ostream& os, const PlayerCc::WSNProxy& c);
 ```
 
-just insert another definition, as this one. 
+just insert another definition, like this one. 
 
 ```tiobox
    PLAYERCC_EXPORT std::ostream& operator << (std::ostream& os, const PlayerCc::RFIDProxy& c);
@@ -561,10 +560,10 @@ including the new proxy file for compilation.
 An interface and proxy do anything except abstract the hardware. 
 At least one driver is required to use this new interface. 
 So, the actual test of the new interface is postponed to the next chapter, 
-where we are going to build a decive driver using the PlaySound. 
+where we are going to build a device driver using the PlaySound. 
 
-For now, we will create a controler using the new proxies, just to test the compilation process. 
-It wont produce any noticeble result. We are going to use the following files for this test.
+For now, we will create a controller using the new proxies, just to test the compilation process. 
+It won't produce any noticeable result. We are going to use the following files for this test.
 
 Player CFG:
 ```tiobox
@@ -601,7 +600,7 @@ Launch Player:
 ```
 
 
-and finally, on another terminal, compile and run the controler software.  
+and finally, on another terminal, compile and run the controller software.  
 ```tiobox
 > cd <source_code>/Ch10.2
 > make playSoundCpp

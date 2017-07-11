@@ -46,12 +46,13 @@ and drivers, which will be discussed in the following section.
   and also different to a driver for a different brand of laser. This is
   the same as the way that drivers for graphics cards differ for each make
   and model of card. Drivers produce and read information which conforms to
-  an ``interface''.
+  an **interface**. The driver design is described in [Chapter 11](DRIVERS.md). 
 * Interfaces are a set way for a driver to send and receive information
   from Player. Like drivers, interfaces are also built in to Player and
   there is a big list of them in the 
   [Player manual](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html).
   They specify the syntax and semantics of how drivers and Player interact.
+  The interface design is described in [Chapter 10](INTERFACES.md).
 * A device is a driver that is bound to an interface so that Player can
   talk to it directly. This means that if you are working on a real robot
   that you can interact with a real device (laser, gripper, camera etc) on

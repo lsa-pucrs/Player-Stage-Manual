@@ -1,63 +1,56 @@
 <!---
-# Chapter 6 - Building Your Own Drivers
+# Chapter 11 - Building a New Driver
 --->
-
-The previous version of this tutorial focus on the constrution of a new scenario (world and models) and on the controller software.
-However, if you have to build a new interface or device driver for Player, you will only find out-of-date instructions, such as in [Section 2.3 - Interfaces, Drivers, and
-Devices](BASICS.md#23-interfaces-drivers-and-devices). 
-Thus, the motivation of this new section is to reduce effort so that new resources can be built for Player.
-
-To be done !
 
 
 ## 11.1 - Definition of a Player Device Driver
 
-A device driver, or just driver, is defined in two different parts of Player documentation 
+A device driver, or just driver, is defined in the [Player documentation](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__tutorial__devices.html) as 
+```
+A piece of software (usually written in C++) that talks to a robotic sensor, actuator, or algorithm, and translates its inputs and outputs to conform to one or more interfaces. The driver's job is hide the specifics of any given entity by making it appear to be the same as any other entity in its class.
+```
 
-* [Definition 1](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__interfaces.html).
-All Player communication occurs through interfaces, which specify the syntax and semantics for a set of messages.
-* [Definition 2](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__tutorial__devices.html).
-A specification of how to interact with a certain class of robotic sensor, actuator, or algorithm. The interface defines the syntax and semantics of all messages that can be exchanged with entities in the same class.
-
-The driver is vendor specific and it actually accesses the device hardware. However, it uses Player interfaces and proxies to abstract the vendor specifics details from the client controller software. 
-The Player documentation gives and example of a laser range finder. A driver is an implementation of a specif laser model of a specific vendor, such as SICK LMS200. 
-However, the Player programmmer uses RangerProxy to access a generic laser ranger. The specific laser running on the robot is informed in the cfg file. 
+The driver is a vendor specific and it actually accesses the device hardware. However, it uses Player interfaces an proxies to abstract the vendor specifics details from the client controller software. 
+The Player documentation gives and example of a laser range finder. A driver is an implementation of a specific laser model of a specific vendor, such as SICK LMS200. 
+However, the Player programmer uses RangerProxy to access a generic laser ranger. The specific laser running on the robot is informed in the cfg file. 
 
 
 ## 11.2 - The Architecture of a Player Device Driver
 
 A Player driver source codes are located in the `server\drivers` dir, where the robot drivers are located under `server\drivers\mixed` dir.
-The drivers `opaque` and `speech` are probably the slimplest ones, so they are recommended to start understanding the driver architecture. 
+The drivers `opaque` and `speech` are probably the simplest ones, so they are recommended to start understanding the driver architecture. 
 
-There are exemple drivers located at `examples\plugins\exampledriver` 
+There are example drivers located at `examples\plugins\exampledriver` 
 
-This section explains the driver architecture using a example of a new Player driver for the audio library called [LibSoX](www.libsox.org). 
-The existing audio resources in Player are quite complex, motivating the creation of a simpler and modern audio interface for robots.
+This section explains the driver architecture using an example of a new Player driver for the audio library called [LibSoX](www.libsox.org). 
+The existing audio resources in Player are quite complicated, motivating the creation of a simpler and modern audio interface for robots.
 
 The source code and compilation scripts for the `soxplayer` driver are located at `<source_code>/Ch11.1/`.
 As can be seem  in `<source_code>/Ch11.1/soxplayer.h`, a Player driver is an extension of the class `ThreadedDriver`. 
 This class has virtual methods that must be defined in the new driver, such as:
 
-- virtual int ProcessMessage(QueuePointer & resp_queue, player_msghdr * hdr, void * data);
-It deals with messages comming from the clients
-- virtual int MainSetup();
+- `virtual int ProcessMessage(QueuePointer & resp_queue, player_msghdr * hdr, void * data);`
+It deals with messages coming from the clients
+- `virtual int MainSetup();`
 Set up the device when a client connects to the driver
-- virtual void MainQuit();
+- `virtual void MainQuit();`
 Shutdown the device when the client is shutdown
-- virtual void Main();
+- `virtual void Main();`
 Main function for device thread
 
 It is also mandatory to have a constructor which parses the cfg file, such as:
-- Soxplayer(ConfigFile* cf, int section);
 
-The driver must also have a device addresss atribute, declared as
-- player_devaddr_t sound_addr;
+- `Soxplayer(ConfigFile* cf, int section);`
+
+The driver must also have a device address attribute, declared as
+
+- `player_devaddr_t sound_addr;`
 
 
 
-The most important method is the `ProcessMessage`, where the incomming messages are checked and processed. 
-`PLAYER_PLAYSOUND_CMD_VALUES` and `player_playsound_cmd_t` must match with the interface used by the driver, in this case the `playsound` interface, defined in [Chapter 10](INTERFACES.md).
-The `MatchMessage` compares the incomming message header (`hdr`) with the expected interface header. If they match, then the incomming data (`data`) is typecasted to data interface type (`player_playsound_cmd_t`) and executed accordingly.
+The most important method is the `ProcessMessage`, where the incoming messages are checked and processed. 
+`PLAYER_PLAYSOUND_CMD_VALUES` and `player_playsound_cmd_t` must match with the interface used by the driver, in this case, the `playsound` interface, defined in [Chapter 10](INTERFACES.md).
+The `MatchMessage` compares the incoming message header (`hdr`) with the expected interface header. If they match, then the incoming data (`data`) is typecasted to data interface type (`player_playsound_cmd_t`) and executed accordingly.
 
 ```tiobox
 int Soxplayer::ProcessMessage(QueuePointer & resp_queue, player_msghdr * hdr, void * data){
@@ -73,7 +66,7 @@ int Soxplayer::ProcessMessage(QueuePointer & resp_queue, player_msghdr * hdr, vo
 }
 ```
 
-The `Play` method actually deals with the lib SoX details such as, open/read the audio file, apply effects, and send it to audio device driver at the OS level, in this case `alsa`.
+The `Play` method actually deals with the lib SoX details such as, open/read the audio file, apply effects, and send it to audio device driver at the OS level, in this case, `alsa`.
 
 The SoxPlayer driver is a fairly simple driver dealing with a single interface, but a driver can be more complex and dealing with multiple interfaces. 
 It is highly recommended after doing this tutorial to experiment with more complex existing drivers in the `server\drivers` dir.
@@ -82,13 +75,13 @@ It is highly recommended after doing this tutorial to experiment with more compl
 ## 11.2 - Compiling the Player Device Driver
 
 You can compile the driver as a stand-alone library or integrated to the Player source code distribution. 
-Usually you would start with the stand-alone compilation until the driver is fully tested. Once it is 
-stable, documented, and it usefull for other people, you can submit it as a patch for the Player maintainer, as explained next. 
+Usually, you would start with the stand-alone compilation until the driver is fully tested. Once it is 
+stable, documented, and it useful for other people, you can submit it as a patch for the Player maintainer, as explained next. 
 
 
 ### 11.2.1 - Driver Depedencies
 
-The soxplayer driver depends on the [LibSoX](). So, now it is the time to install this library with the following command:
+The soxplayer driver depends on the [LibSoX](http://sox.sourceforge.net/libsox.html). So, now it is the time to install this library with the following command:
 
 ```
 > sudo apt-get install -y libsox-dev
@@ -96,12 +89,11 @@ The soxplayer driver depends on the [LibSoX](). So, now it is the time to instal
 
 ### 11.2.2 - Compiling the Player Device Driver as a Stand-Alone driver
 
-Initially, while you are sitll developing and testing your new driver, it is better to compile it separatedly from Player. 
+Initially, while you are still developing and testing your new driver, it is better to compile it separately from Player. 
 This section shows you how to compile like this. The environment variables `CMAKE_MODULE_PATH` and `PKG_CONFIG_PATH` 
 are very important in this step. Please check the [Section 1.1 - A Note on Installing Player/Stage](INTRO.md#11-a-note-on-installing-player-stage)
 to see how to set these variables. 
-Details of [CMake](http://www.gnu.org/software/make/manual/make.html) and [PKGConfig]() are beyond the scope of this manual, 
-but it is higly recommended subject of study if you plan to be a serious Player/stage developer or Linux software developer. 
+Details of [CMake](https://cmake.org/) and [PKGConfig](https://en.wikipedia.org/wiki/Pkg-config) are beyond the scope of this manual, but it is highly recommended subject of study if you plan to be a serious Player/stage developer or Linux software developer. 
 
 ```
 > cd <source_code>/Ch11.1/
@@ -112,16 +104,16 @@ but it is higly recommended subject of study if you plan to be a serious Player/
 ```
 
 The driver library will be created in the current dir (`Ch11.1/build`). For convenience, there is a `compile.sh` script that does the same thing with a single command.
-Alternatively, threre is a the `Ch11.1/Mafefile`, which uses PKGConfig definitions intead of CMake. 
+Alternatively, there is a the `Ch11.1/Mafefile`, which uses PKGConfig definitions instead of CMake. 
 
 
 ### 11.2.3 - Compiling the Player Device Driver as part of Player distribution
 
-If you really think that your driver can be usefull for other people, it is highly recommended to include it into the Player source code distribution. 
+If you really think that your driver can be useful for other people, it is highly recommended to include it into the Player source code distribution. 
 Here were are assuming a git version system is used for [Player](www.github/playerprojext/player). 
 
 Download a new, clean, and updated Player source code it from [www.github/playerprojext/player](www.github/playerprojext/player) and follow these steps to add the soxplayer source code and scripts.
-For this step you cannot reuse an existing local copy because it might have your local changes.
+For this step, you cannot reuse an existing local copy because it might have your local changes.
 
 ```
 > git clone xxxxx
@@ -162,7 +154,7 @@ check the option soxplayer if it is ON or OFF
 > make -j 8
 ```
 
-If it is ok, then we need to create a patch file and submitted it to the [www.github/playerprojext/player](www.github/playerprojext/player)
+If it is ok, then create a patch file and submitted it to the [https://github.com/playerproject/player](https://github.com/playerproject/player)
 
 ```
 > cd  player/
@@ -219,7 +211,7 @@ Launch Player:
 > player soxplayer.cfg &
 ```
 
-and finally, on another terminal, compile and run the controler software.  
+and finally, on another terminal, compile and run the controller software.  
 ```tiobox
 > cd <source_code>/Ch11.2
 > cmake .

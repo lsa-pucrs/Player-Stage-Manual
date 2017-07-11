@@ -135,3 +135,8 @@ echo -e "${GREEN}Compiling Stage ... ${NC}\n"
 make -j ${NUM_CORES}
 sudo make install
 echo -e "${GREEN}Stage installed !!!! ${NC}\n"
+
+##################################################
+# set environment variables for terminals
+##################################################
+#echo "source $DONNIE_PATH/setup.sh" >> ~/.bashrc

@@ -25,8 +25,9 @@ just using Player (which is the same thing but on a real robot, without any simu
 
 ## 1.1 - A Note on Installing Player/Stage
 
-The install script described below has been tested with Ubuntu 12.04, 14.04, and 16.04. Each new version might introduce slightly different package names.
-So its up to you to keep updating this script in the future.
+The install script described below has been tested with Ubuntu 12.04, 14.04, and 16.04. 
+Each new version might introduce slightly different package names.
+So it's up to you to keep updating this script in the future.
 
 ```tiobox
 OS=$(lsb_release -si)
@@ -152,11 +153,12 @@ export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH}
 export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH}
 ```
 
-Does any thing went wrong during the installation ? It is usually very simple to solve these problems. Typically, the error message says the library or piece of code 
-with error. Google this library name and your linus ditribution version to find how to install the library. Install it and try it again. If the error is after installation, 
-during the execution of Player, then probably you forgot to add the environment variables into your `$HOME/.bashrc` file or your system has different path names. 
+Does anything go wrong during the installation ? It is usually straightforward to solve these problems. 
+Typically, the error message says the library or piece of code with error. 
+Google this library name and your Linux distribution version to find how to install the library. Install it and try it again. If the error is after installation, 
+during the execution of Player, then probably you forgot to add the environment variables to your `$HOME/.bashrc` file or your system has different path names. 
 Adjust it and try it again. You might also run `ldd /usr/local/bin/player` to find out which dynamic library was not found. Once you got the missing library name, 
-find this library inthe system. If it was found, then add its path to the `LD_LIBRARY_PATH` enviroment variable in the `$HOME/.bashrc` file. If it was not found, 
+find this library in the system. If it was found, then add its path to the `LD_LIBRARY_PATH` environment variable in the `$HOME/.bashrc` file. If it was not found, 
 Google it and install the library into your system. Then, try to execute Player again. 
 
 ## 1.2 - A Note about TRY IT OUT sections
