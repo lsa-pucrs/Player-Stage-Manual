@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]){
 	using namespace PlayerCc;
  	PlayerClient   robot("localhost",6665);
-	SoundProxy     sound(&robot, 0);
+	PlaySoundProxy     sound(&robot, 0);
 
 	if(argc>1){
 		sound.play(argv[1]);
@@ -13,5 +13,6 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
+    std::cout << "closing Player client\n";
 	return 0;
 }

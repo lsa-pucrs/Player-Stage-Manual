@@ -106,9 +106,9 @@ driver
 #include <fstream> //to check file exists
 
 // Message levels
-//#define MESSAGE_ERROR	0
-//#define MESSAGE_INFO	1
-//#define MESSAGE_DEBUG	2
+#define MESSAGE_ERROR	0
+#define MESSAGE_INFO	1
+#define MESSAGE_DEBUG	2
 
 ////////////////////////////////////////////////////////////////////////////////
 // The class for the driver

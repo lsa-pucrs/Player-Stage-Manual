@@ -1,13 +1,14 @@
 # Desc: SoX driver makefile
 # CVS: $Id$
 
-all: libsoxplayer.so
+all: soxplayer.so
+CXX = g++
 
 %.o: %.cc
 	$(CXX) -Wall -fpic -g3 `pkg-config --cflags playercore` -c $<
 
-libsoxplayer.so: exampledriver.o
-	$(CXX) -shared -nostartfiles -o $@ $^
+soxplayer.so: soxplayer.o
+	$(CXX) -shared -lsox  `pkg-config --libs playercore` -o $@ $^
 
 clean:
 	rm -f *.o *.so

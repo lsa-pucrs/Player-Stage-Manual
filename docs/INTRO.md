@@ -25,7 +25,7 @@ just using Player (which is the same thing but on a real robot, without any simu
 
 ## 1.1 - A Note on Installing Player/Stage
 
-The install script described below has been tested with Ubuntu 12.04, 14.04, and 16.04. 
+The install script described below has been tested with Ubuntu 12.04, 14.04, and 16.04.
 Each new version might introduce slightly different package names.
 So it's up to you to keep updating this script in the future.
 
@@ -51,12 +51,12 @@ sudo apt-get install -y pkg-config
 ##################################################
 # install Player/Stage depedencies
 ##################################################
-sudo apt-get install -y libfltk1.1-dev 
-sudo apt-get install -y freeglut3-dev 
-sudo apt-get install -y libpng12-dev 
-sudo apt-get install -y libltdl-dev 
-#libltdl7 
-case "${VER}" in 
+sudo apt-get install -y libfltk1.1-dev
+sudo apt-get install -y freeglut3-dev
+sudo apt-get install -y libpng12-dev
+sudo apt-get install -y libltdl-dev
+#libltdl7
+case "${VER}" in
 	14.04)
 		sudo apt-get install -y libdb5.1-stl
 		;;
@@ -75,8 +75,8 @@ sudo apt-get install -y libasound2-dev
 # alsa alsa-tools  alsa-utils
 # for pmap
 sudo apt-get install -y libgsl0-dev libxmu-dev
-# for python bindings for Player clients - 
-# It is not recommended to use python due to limitations in the bindings. 
+# for python bindings for Player clients -
+# It is not recommended to use python due to limitations in the bindings.
 # Things that work on a C/C++ client might not work on a Python client.
 sudo apt-get install -y python-dev swig
 # PostGIS for a Player driver
@@ -85,7 +85,7 @@ sudo apt-get install -y libpq-dev libpqxx-dev
 #sudo apt-get install -y doxygen
 
 ##################################################
-# Downloading source code 
+# Downloading source code
 ##################################################
 echo -e "${GREEN}Downloading Player source code from GitHub... ${NC}\n"
 git clone https://github.com/playerproject/player.git
@@ -102,10 +102,10 @@ export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib/:${LD_LIBRARY_PATH}
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
 # Player lib path
 export LD_LIBRARY_PATH=/usr/local/lib64/:${LD_LIBRARY_PATH}
-# setup pkgconfig and cmake. Try the following commands to find where these files are located and add all of them 
+# setup pkgconfig and cmake. Try the following commands to find where these files are located and add all of them
 # run 'sudo find / -name "*.pc" -type f' to find all the pc files for pkg-config
 # run 'sudo find / -name "*.cmake" -type f' to find all the cmake files for cmake
-case "${VER}" in 
+case "${VER}" in
 	14.04)
 		export CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}:/usr/share/cmake-2.8/Modules/:/usr/share/cmake-2.8/Modules/Platform/:/usr/share/cmake-2.8/Modules/Compiler/:/usr/local/share/cmake/Modules:/usr/local/lib64/cmake/Stage/:/usr/lib/fltk/
 		;;
@@ -116,7 +116,7 @@ esac
 export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig/:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/share/pkgconfig/:${PKG_CONFIG_PATH}
 
 ##################################################
-# Compile and install Player/Stage 
+# Compile and install Player/Stage
 ##################################################
 cd player
 mkdir -p build
@@ -126,7 +126,7 @@ echo -e "${GREEN}Configuring Player ... ${NC}\n"
 # Fow now, we are using the default intallation, disabling Python bidings
 cmake -DCMAKE_BUILD_TYPE=Release -DDEBUG_LEVEL=NONE -BUILD_PYTHONC_BINDINGS:BOOL=OFF ..
 echo -e "${GREEN}Compiling Player ... ${NC}\n"
-make -j ${NUM_CORES} 
+make -j ${NUM_CORES}
 sudo make install
 echo -e "${GREEN}Player installed !!!! ${NC}\n"
 
@@ -147,28 +147,33 @@ For OSX users you might find the following install instructions useful:
 
 Even after it's installed, you may need to do some per-user setup on your
 system.  For example, on our system, the following two lines (adapted as needed to your particular system) need to be
-added to each user's `$HOME/.bashrc` file (or to the system-wide one): 
+added to each user's `$HOME/.bashrc` file (or to the system-wide one). Edit the `PLAYERDIR` according to the directory selected for instalation.
+If this parameter has not changed, then the typical dir is `/usr/local`.
+
 ```
-export LD_LIBRARY_PATH=/usr/local/lib64:$LD_LIBRARY_PATH}
-export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH}
+export PLAYERDIR=/usr/local
+export LD_LIBRARY_PATH=${PLAYERDIR}/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
+export PATH=${PLAYERDIR}/bin:${PATH}
+export PKG_CONFIG_PATH=${PLAYERDIR}/lib/x86_64-linux-gnu/pkgconfig/::${PKG_CONFIG_PATH}
+export CMAKE_MODULE_PATH=${PLAYERDIR}/share/cmake/Modules/:${CMAKE_MODULE_PATH}
 ```
 
-Does anything go wrong during the installation ? It is usually straightforward to solve these problems. 
-Typically, the error message says the library or piece of code with error. 
-Google this library name and your Linux distribution version to find how to install the library. Install it and try it again. If the error is after installation, 
-during the execution of Player, then probably you forgot to add the environment variables to your `$HOME/.bashrc` file or your system has different path names. 
-Adjust it and try it again. You might also run `ldd /usr/local/bin/player` to find out which dynamic library was not found. Once you got the missing library name, 
-find this library in the system. If it was found, then add its path to the `LD_LIBRARY_PATH` environment variable in the `$HOME/.bashrc` file. If it was not found, 
-Google it and install the library into your system. Then, try to execute Player again. 
+Does anything go wrong during the installation ? It is usually straightforward to solve these problems.
+Typically, the error message says the library or piece of code with error.
+Google this library name and your Linux distribution version to find how to install the library. Install it and try it again. If the error is after installation,
+during the execution of Player, then probably you forgot to add the environment variables to your `$HOME/.bashrc` file or your system has different path names.
+Adjust it and try it again. You might also run `ldd /usr/local/bin/player` to find out which dynamic library was not found. Once you got the missing library name,
+find this library in the system. If it was found, then add its path to the `LD_LIBRARY_PATH` environment variable in the `$HOME/.bashrc` file. If it was not found,
+Google it and install the library into your system. Then, try to execute Player again.
 
 ## 1.2 - A Note about TRY IT OUT sections
 There will be sections scattered throughout this tutorial labeled **TRY IT OUT**
 that explain how to run examples. You'll need to download [the example
-code](http://github.com/NickelsLab/Player-Stage-Manual/archive/master.zip) 
+code](http://github.com/NickelsLab/Player-Stage-Manual/archive/master.zip)
 which will contain the files. In these sections, you'll be given commands to
 type in a terminal
 window (or bash shell). They'll be shown prefixed with a carrot `>` and
-typeset in monospace font. For example, 
+typeset in monospace font. For example,
 
 ```
 > ls
@@ -189,14 +194,14 @@ working, just running the examples will not teach you (as) much!
 
 ## 1.3 - TRY IT OUT (Preparation)
 
-* If you haven't already, download the sample code from 
- [http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip](http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip) 
+* If you haven't already, download the sample code from
+ [http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip](http://github.com/NickelsLab/Player-Stage-Manual/archive/v4.1.0.zip)
 * Next, you'll need to extract the sample code.  To do this, open a
  terminal and cd to the directory where you put the file
  `master.zip`, then extract using zip.  Yes, there are
  GUI-based ways to do this too.  I won't cover them here.
 * I'll assume that you want to put this directory in your home directory.
-  If not, just replace the commands given with the appropriate directory. 
+  If not, just replace the commands given with the appropriate directory.
 * I'll likewise assume that you downloaded the code into $HOME/Downloads.
   (Again, your specific path may differ.)
 * (From here on out, I'll just say that your extracted source code is in
@@ -218,10 +223,10 @@ First we will run a world and configuration file that comes bundled with
   Stage. In a terminal window, you will navigate to the Stage/worlds folder, by
   default (in Linux at least) this is `/usr/local/share/stage/worlds`. Type
   the following commands to run the ``simple world'' that comes with
-  Player/Stage: 
+  Player/Stage:
 ```tiobox
 > cd /usr/local/share/stage/worlds
-> player simple.cfg 
+> player simple.cfg
 ```
 
 Assuming Player/Stage is installed properly you should now have a window open which looks like the figure below.  Congratulations,you can now build Player/Stage simulations!

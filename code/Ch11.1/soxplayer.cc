@@ -4,7 +4,7 @@
 Soxplayer::Soxplayer(ConfigFile* cf, int section) : ThreadedDriver(cf, section){
 
 	//create a sound interface
-	if (cf->ReadDeviceAddr(&(this->sound_addr), section, "provides", PLAYER_SOUND_CODE, -1, NULL)){
+	if (cf->ReadDeviceAddr(&(this->sound_addr), section, "provides", PLAYER_PLAYSOUND_CODE, -1, NULL)){
 		PLAYER_ERROR("[soxplayer] Could not read SOUND");
 		SetError(-1);
 		return;
@@ -56,7 +56,7 @@ int Soxplayer::ProcessMessage(QueuePointer & resp_queue, player_msghdr * hdr, vo
 	  PLAYER_MSG0(MESSAGE_INFO,"[soxplayer] Msg received");
 	#endif
 	if (Message::MatchMessage(hdr, PLAYER_MSGTYPE_CMD, PLAYER_PLAYSOUND_CMD_VALUES, sound_addr)){
-		Play((reinterpret_cast<player_playsound_cmd_t*>(data))->filename);
+		Play((reinterpret_cast<player_playsound_cmd_t*>(data))->string);
 		return(0);
 	}
 
