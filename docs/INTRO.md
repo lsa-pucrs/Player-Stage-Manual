@@ -28,6 +28,8 @@ just using Player (which is the same thing but on a real robot, without any simu
 The install script described below has been tested with Ubuntu 12.04, 14.04, and 16.04.
 Each new version might introduce slightly different package names.
 So it's up to you to keep updating this script in the future.
+This script is located at `code/install.sh` directory.
+
 
 ```tiobox
 OS=$(lsb_release -si)

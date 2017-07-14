@@ -6,8 +6,12 @@
 ## 11.1 - Definition of a Player Device Driver
 
 A device driver, or just driver, is defined in the [Player documentation](http://playerstage.sourceforge.net/doc/Player-3.0.2/player/group__tutorial__devices.html) as
+
 ```
-A piece of software (usually written in C++) that talks to a robotic sensor, actuator, or algorithm, and translates its inputs and outputs to conform to one or more interfaces. The driver's job is hide the specifics of any given entity by making it appear to be the same as any other entity in its class.
+A piece of software (usually written in C++) that talks to a robotic sensor, actuator,
+or algorithm, and translates its inputs and outputs to conform to one or more interfaces.
+The driver's job is hide the specifics of any given entity by making it appear to
+be the same as any other entity in its class.
 ```
 
 The driver is a vendor specific and it actually accesses the device hardware. However, it uses Player interfaces an proxies to abstract the vendor specifics details from the client controller software.
@@ -208,6 +212,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 
+	std::cout << "closing Player client\n";
 	return 0;
 }
 
