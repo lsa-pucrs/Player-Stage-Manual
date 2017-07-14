@@ -141,33 +141,4 @@ class Soxplayer : public ThreadedDriver{
 };
 
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-// A factory creation function, declared outside of the class so that it     //
-// can be invoked without any object context (alternatively, you can         //
-// declare it static in the class).  In this function, we create and return  //
-// (as a generic Driver*) a pointer to a new instance of this driver.        //
-Driver* Soxplayer_Init(ConfigFile* cf, int section){                         //
-	// Create and return a new instance of this driver                       //
-	return ((Driver*) (new Soxplayer(cf, section)));                         //
-}                                                                            //
-// A driver registration function, again declared outside of the class so    //
-// that it can be invoked without object context.  In this function, we add  //
-// the driver into the given driver table, indicating which interface the    //
-// driver can support and how to create a driver instance.                   //
-void Soxplayer_Register(DriverTable* table){                                 //
-	table->AddDriver("soxplayer", Soxplayer_Init);                            //
-}                                                                            //
-// Extra stuff for building a shared object.                                 //
-/* need the extern to avoid C++ name-mangling  */                            //
-extern "C"{                                                                  //
-	int player_driver_init(DriverTable* table){                              //
-		PLAYER_MSG0(MESSAGE_INFO, "[soxplayer] driver initiallized");        //
-		Soxplayer_Register(table);                                           //
-		PLAYER_MSG0(MESSAGE_INFO, "[soxplayer] waiting for client startup...");
-		return(0);                                                           //
-	}                                                                        //
-}                                                                            //
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 #endif
