@@ -154,7 +154,7 @@ If this parameter has not changed, then the typical dir is `/usr/local`.
 
 ```
 export PLAYERDIR=/usr/local
-export LD_LIBRARY_PATH=${PLAYERDIR}/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib/:${PLAYERDIR}/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
 export PATH=${PLAYERDIR}/bin:${PATH}
 export PKG_CONFIG_PATH=${PLAYERDIR}/lib/x86_64-linux-gnu/pkgconfig/::${PKG_CONFIG_PATH}
 export CMAKE_MODULE_PATH=${PLAYERDIR}/share/cmake/Modules/:${CMAKE_MODULE_PATH}
