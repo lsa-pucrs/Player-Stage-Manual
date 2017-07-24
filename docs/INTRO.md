@@ -80,7 +80,7 @@ sudo apt-get install -y libgsl0-dev libxmu-dev
 # for python bindings for Player clients -
 # It is not recommended to use python due to limitations in the bindings.
 # Things that work on a C/C++ client might not work on a Python client.
-sudo apt-get install -y python-dev swig
+#sudo apt-get install -y python-dev swig
 # PostGIS for a Player driver
 sudo apt-get install -y libpq-dev libpqxx-dev
 # if you want to compile the html document, enable this line
@@ -93,17 +93,13 @@ echo -e "${GREEN}Downloading Player source code from GitHub... ${NC}\n"
 git clone https://github.com/playerproject/player.git
 
 echo -e "${GREEN}Downloading Stage source code from GitHub... ${NC}\n"
-git clone https://github.com/lsa-pucrs/Stage.git
+git clone https://github.com/rtv/Stage.git
 
 ##################################################
 # set environment variables
 ##################################################
 # these are the required environment variables for Ubuntu. Other distributions might have slightly different path names
-export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib/:${LD_LIBRARY_PATH}
-# Opencv lib path
-export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
-# Player lib path
-export LD_LIBRARY_PATH=/usr/local/lib64/:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib/:/usr/local/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
 # setup pkgconfig and cmake. Try the following commands to find where these files are located and add all of them
 # run 'sudo find / -name "*.pc" -type f' to find all the pc files for pkg-config
 # run 'sudo find / -name "*.cmake" -type f' to find all the cmake files for cmake
@@ -115,7 +111,7 @@ case "${VER}" in
 		export CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}:/usr/share/cmake-3.5/Modules/:/usr/share/cmake-3.5/Modules/Platform/:/usr/share/cmake-3.5/Modules/Compiler/:/usr/local/share/cmake/Modules:/usr/local/lib/cmake/Stage/:/usr/lib/fltk/
 		;;
 esac
-export PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig/:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/share/pkgconfig/:${PKG_CONFIG_PATH}
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/share/pkgconfig/:/usr/local/lib/pkgconfig/:${PKG_CONFIG_PATH}
 
 ##################################################
 # Compile and install Player/Stage
@@ -156,7 +152,7 @@ If this parameter has not changed, then the typical dir is `/usr/local`.
 export PLAYERDIR=/usr/local
 export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib/:${PLAYERDIR}/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}
 export PATH=${PLAYERDIR}/bin:${PATH}
-export PKG_CONFIG_PATH=${PLAYERDIR}/lib/x86_64-linux-gnu/pkgconfig/::${PKG_CONFIG_PATH}
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/share/pkgconfig/:/usr/local/lib/pkgconfig/:${PKG_CONFIG_PATH}
 export CMAKE_MODULE_PATH=${PLAYERDIR}/share/cmake/Modules/:${CMAKE_MODULE_PATH}
 ```
 
