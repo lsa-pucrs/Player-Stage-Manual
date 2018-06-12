@@ -442,7 +442,7 @@ position model type but we could equally use it with other model types.
 	
 ```
 define bigbob position
-
+(
       block
       (
             points 6
@@ -454,6 +454,12 @@ define bigbob position
             point[5] [0 0]
             z [0 1]
       )
+)
+bigbob
+(
+		  name "bob1"
+		  pose [ 0 0 0 0]
+		  color "gray"
 )
 ```
 
