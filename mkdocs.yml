@@ -1,10 +1,10 @@
-site_name: How to use Player/Stage
+site_name: Como usar Player/Stage
 repo_url: https://github.com/NickelsLab/Player-Stage-Manual
 theme: readthedocs
 pages:
 - Home : index.md
-- 'Ch1 - Introduction': 'INTRO.md'
-- 'Ch2 - The Basics': 'BASICS.md'
+- 'Ch1 - Introducao': 'INTRO.md'
+- 'Ch2 - O Basico': 'BASICS.md'
 - 'Ch3 - Building a World': 'WORLDFILES.md'
 - 'Ch4 - Writing a Configuration (.cfg) File': 'CFGFILES.md'
 - 'Ch5 - Getting Your Simulation to Run your code': 'CONTROLLERS.md'
