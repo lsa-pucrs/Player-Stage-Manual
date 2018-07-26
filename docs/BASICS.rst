@@ -1,45 +1,26 @@
 .. raw:: html
 
    <!---
-   # Chapter 2 - The Basics
+   # Capítulo 2 - O Básico
    --->
 
 2.1 - Important File Types
 --------------------------
 
-In Player/Stage there are 3 kinds of file that you need to understand to
-get going with Player/Stage:
+O Player/Stage é uma ferramenta de simulação de robôs, que compreende um programa chamado Player, que é uma camada de abstração de hardware. Isso quer dizer que ele conversa com os bits de hardware do robô (como uma garra ou uma câmera), e permite que você os controle com seu código, não precisando se importar em como as várias partes do robô funcionam. O Stage é um plugin do Player que recebe as instruções mandadas pelo Player e as transforma em uma simulação do seu robô. Ele também simula informações de sensores e manda para o Player, que por sua vez faz com que essas informações fiquem disponíveis para o seu código.
 
--  a .world file
--  a .cfg (configuration) file
--  a .inc (include) file
+Desta maneira, a simulação é composta por três partes:
+ - Seu código. Ele conversa com o Player.
+ - O Player. Ele pega seu código e manda as instruções para um robô. Recebe as informações sensoriais do robô e manda para o seu código.
+ - O Stage. Faz interface com o Player da mesma maneira que o hardware de um robô faria. Recebe instruções do Player e move a simulação de um robô em um mundo simulado.
 
-The .world file tells Player/Stage what things are available to put in
-the world. In this file you describe your robot, any items which
-populate the world and the layout of the world. The .inc file follows
-the same syntax and format of a .world file but it can be *included*. So
-if there is an object in your world that you might want to use in other
-worlds, such as a model of a robot, putting the robot description in a
-.inc file just makes it easier to copy over, it also means that if you
-ever want to change your robot description then you only need to do it
-in one place and your multiple simulations are changed too.
+No Player/Stage existem três tipos de arquivos que você precisa entender para continuar a compreensão do Player/Stage:
+ - o arquivo .world
+ - o arquivo .cfg (configuração)
+ - o arquivo .inc (incluir)
 
-The .cfg file is what Player reads to get all the information about the
-robot that you are going to use.This file tells Player which drivers it
-needs to use in order to interact with the robot, if you're using a real
-robot these drivers are built in to Player (or you can download or write
-your own drivers, but I'm not going to talk about how to do this here.)
-Alternatively, if you want to make a simulation, the driver is always
-Stage (this is how Player uses Stage in the same way it uses a robot: it
-thinks that it is a hardware driver and communicates with it as such).
-The .cfg file tells Player how to talk to the driver, and how to
-interpret any data from the driver so that it can be presented to your
-code. Items described in the .world file should be described in the .cfg
-file if you want your code to be able to interact with that item (such
-as a robot), if you don't need your code to interact with the item then
-this isn't necessary. The .cfg file does all this specification using
-interfaces and drivers, which will be discussed in the following
-section.
+O arquivo .world fala para o Player/Stage que coisas estão disponíveis para serem colocadas no mundo virtual. Nesse arquivo você descreve o robô, qualquer item que popule esse mundo e o layout do mesmo. O arquivo .inc segue a mesma sintaxe e formato do arquivo .world mas pode ser incluído. Então se existe um objeto que você pode querer usar em outros mundos, como o modelo de um robô, colocar a descrição do robô em um arquivo .inc faz com que seja mais fácil de copiá-lo. Também significa que, se algum dia você quiser mudar a descrição do seu robô, você só precisa fazê-la em um lugar e as suas múltiplas simulações também serão mudadas.
+O arquivo .cfg é o que o Player lê para pegar todas as informações sobre o robô que você vai usar. Este arquivo diz ao Player quais drivers ele precisa usar para interagir com o robô. O arquivo .cfg diz para o Player como conversar com o driver, e como interpretar qualquer informação do driver para que esta possa ser apresentada para o seu código. Itens descritos no arquivo .world devem ser descritos no arquivo .cfg se você quiser que seu código tenha a capacidade de interagir com aquele item(como um robô), se você não precisa que o código interaja com o item então isto não é necessário. O arquivo .cfg faz todas essas especificações usando interfaces e drivers.
 
 2.2 - Interfaces, Drivers and Devices
 -------------------------------------

@@ -109,7 +109,7 @@ Podemos ver na primeira linha que está sendo definido um modelo chamado
    <!--- Figure --->
 
 \| \| \| ---------------\| \| |Figure 3.2|\ \| \| Figura 3.2: Um mapa
-vazio com o gui\_grid habilitad. Com o gui\_grid disabilitado este seria
+vazio com o gui\_grid habilitado. Com o gui\_grid desabilitado este seria
 apenas um quadrado branco vazio.\|
 
 Para usarmos o arquivo map.inc colocamos o seguinte código em nosso
