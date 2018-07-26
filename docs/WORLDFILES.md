@@ -1,19 +1,11 @@
 <!---
-# Chapter 3 - Building a World
+# Capítulo 3 - Construindo um mundo
 --->
 
-## 3.1 - Building an Empty World </a>
+## 3.1 - Construindo um mundo vazio </a>
 
-When we tell Player to build a world we only give it
-the .cfg file as an input. This .cfg file needs to tell us where to find
-our .world file, which is where all the items in the simulation are
-described. To explain how to build a Stage world containing nothing but
-walls we will use an example.
+Para começarmos a construir um mundo vazio nós precisamos de um arquivo .cfg. Primeiramente abra seu editor de texto favorito e crie um documento chamado `empty.cfg`. Copie no documento o código a seguir:
 
-To start building an empty world we need a .cfg file. First create a
-document called `empty.cfg` (i.e. open in your favorite text editor -
-`gedit` is a good starter program if you don't have a favorite) and copy
-the following code into it: 
 ```
 driver
 (		
@@ -22,48 +14,33 @@ driver
 
    provides ["simulation:0" ]
 
-   # load the named file into the simulator
+   # carrega o arquivo nomeado no simulador
    worldfile "empty.world"	
 )
 ```
 
-The configuration file syntax is described in [Chapter 4](CFGFILES.md), 
-but basically what is happening here is that
-your configuration file is telling Player that there is a driver called
-`stage` in the `stageplugin` library, and this will give Player
-data which conforms to the `simulation` interface. To build the
-simulation Player needs to look in the worldfile called `empty.world`
-which is stored in the same folder as this .cfg. If it was stored elsewhere
-you would have to include a filepath, for example
-`./worlds/empty.world`. Lines that begin with the hash symbol (\#) are
-comments.  When you build a simulation, any simulation, in Stage the above
-chunk of code should always be the first thing the configuration file says.
-Obviously the name of the worldfile should be changed depending on what you
-called it though.
+Basicamente o que está acontecendo aqui é que o seu arquivo de configuração está dizendo para o Player que existe um driver chamado `stage` na biblioteca `stageplugin`, e isso dará ao Player informação que coincide para a interface `simulation`. Para construir o mundo virtual o Player precisa olhar para o arquivo .world que deve estar salvo na mesma pasta que o arquivo .cfg. Se ele estiver salvo em outra pasta é necessário especificar o caminho no arquivo .cfg, como por exemplo `./worlds/empty.world`. Linhas que começam com hashtag (#) são comentários. Quando você construir uma simulação no Stage, qualquer simulação, o pedaço de código acima deve sempre ser a primeira coisa escrita no seu arquivo .cfg. Obviamente o nome do arquivo .world pode ser modificado para o nome que você achar mais apropriado.
 
-Now a basic configuration file has been written, it is time to tell
-Player/Stage what to put into this simulation. This is done in the .world
-file. 
+Agora que a configuração básica está pronta, é hora de dizer ao Player/Stage o que colocar nesse mundo virtual. Fazemos isso criando um arquivo .world.
 
-### 3.1.1 - Models
 
-A worldfile is basically just a list of models that describes all the stuff
-in the simulation. This includes the basic environment, robots and other
-objects. The basic type of model is called "model", and you define a model using the following syntax:
+### 3.1.1 - Modelos
+
+O arquivo .world é basicamente apenas uma lista de modelos que descrevem todas as coisas no mundo virtual, na simulação. Isso inclui o ambiente básico, robôs e outros objetos. O tipo básico de modelo se chama “model”, e você define um modelo usando a seguinte sintaxe:
 ```
 define model_name model
 (
-   # parameters
+   # parâmetros
 )
 ```
-This tells Player/Stage that you are `defining` a `model` which you have called `model_name`, and all the stuff in the round brackets are parameters of the model. To begin to understand Player/Stage model parameters, let's look at the `map.inc` file that comes with Stage, this contains the `floorplan` model, which is used to describe the basic environment of the simulation (i.e. walls the robots can bump into):
+Isso diz ao Player/Stage que você está definindo um modelo que você chamou de `model_name`, e todas as coisas dentro dos parênteses são parâmetros do modelo. Para começar a entender os parâmetros dos modelos do Player/Stage, vamos analisar um arquivo chamado `map.inc`, um arquivo que vem com o Stage e contém o modelo `floorplan`, que é usado para descrever o ambiente básico do mundo virtual:
 ```
 define floorplan model
 (
-  # sombre, sensible, artistic
+  
   color "gray30"
 
-  # most maps will need a bounding box
+  # a maioria dos mapas precisará de limites em volta
   boundary 1
 
   gui_nose 0
@@ -75,70 +52,28 @@ define floorplan model
   ranger_return 1
 )
 ```
-We can see from the first line that they are defining a `model` called `floorplan`. 
+Podemos ver na primeira linha que está sendo definido um modelo chamado `floorplan`. 
 
-* `color`: Tells Player/Stage what colour to render this model, in this
-  case it is going to be a shade of grey. 
-* `boundary`: Whether or not there is a bounding box around the model. This
-  is an example of a binary parameter, which means the if the number next
-  to it is 0 then it is false, if it is 1 or over then it's true. So here
-  we DO have a bounding box around our "map" model so the robot can't
-  wander out of our map.  
-* `gui_nose`: this tells Player/Stage that it
-  should indicate which way the model is facing. Figure 3.2 shows the
-  difference between a map with a nose and one without.  
-* `gui_grid`: this will
-  superimpose a grid over the model. Figure 3.3 shows a map with a grid.
-* `gui_move`: this indicates whether it should be possible to drag and drop
-  the model. Here it is 0, so you cannot move the map model once
-  Player/Stage has been run. In 
-  [1.4 - Try It Out](INTRO.md#14-try-it-out) when the
-  Player/Stage example `simple.cfg` was run it was possible to drag and
-  drop the robot because its `gui_move` variable was set to 1.
-* `gui_outline`: indicates whether or not the model should be outlined.
-  This makes no difference to a map, but it can be useful when making
-  models of items within the world.
-* `fiducial_return`: any parameter of the form
-  some_sensor_return describes how that kind of sensor should react to the
-  model. "Fiducial" is a kind of robot sensor which will be described later
-  in [Section 3.2 - Fiducial](#fiducial). Setting
-  `fiducial_return` to 0 means that the map cannot be detected by a
-  fiducial sensor.
-* `ranger_return`: Setting `ranger_return` to a negative
-      number indicates that a model cannot be seen by ranger sensors.
-      Setting `ranger_return` to a number between 0 and 1 (inclusive)
-      (Note: this means that `ranger_return 0` **will allow** a ranger
-      sensor to see the object --- the *range* will get set, it'll just set
-      the *intensity* of that return to zero.)  See [Section 5.3.2 - Interaction with
-      Proxies --- Ranger](CONTROLLERS.md#532-rangerproxy) for more details.
-      controls the intensity of the return seen by a ranger sensor.
-* `gripper_return`: Like `fiducial_return`, `gripper_return` tells
-  Player/Stage that your model can be detected by the relevant sensor, i.e.
-  it can be gripped by a gripper. Here `gripper_return` is set to 0 so the
-  map cannot be gripped by a gripper. 
+* `color`: informa o Player/Stage que cor renderizar este modelo, neste caso será um tom de       cinza.
+* `boundary`: informa se há ou não uma área limite ao redor do modelo. Esse é um exemplo de       parâmetro binário, o que significa que se o número ao lado é 0, então é falso, e se é 1 é        verdadeiro. Então neste caso nós temos um limite ao redor do nosso “mapa” para que o robô não    possa sair para fora dele.
+* `gui_nose`: indica ao Player/Stage a direção do modelo.
+* `gui_grid`: sobrepõe uma grade no modelo.
+* `gui_move`: indica se é possível ou não arrastar e soltar o modelo.
+* `gui_outline`: indica se o modelo deve ou não ser delineado. Isso não faz diferença em um mapa, mas pode ser útil ao fazer modelos de itens que estão dentro do mundo.
+* `gripper_return`, `fiducial_return` e `ranger_return`: qualquer parâmetro na forma              algumsensor_return descreve como aquele tipo de sensor deve reagir ao modelo. Configurando       estes parâmetros com o número 0, estamos indicando que o modelo não pode ser detectado por       estes sensores.
 
-
-<!--- Figure --->
-| | |
-| ---------------| ------ |
-| ![Figure 3.2a](pics/empty_world/gui_nonose_example.png) | ![Figure 3.2b](pics/empty_world/gui_nose_example.png) | 
-
-Figure 3.2: The first picture shows an empty map without a nose. The second
-picture shows the same map with a nose to indicate orientation,
-this is the horizontal line from the centre of the map to the
-right, it shows that the map is actually facing to the right.
 		
 <!--- Figure --->
 | |
 | ---------------| 
-| ![Figure 3.3](pics/empty_world/gui_nonose_example.png)|
-| Figure 3.3: An empty map with gui_grid enabled. With gui_grid disabled this would just be an empty white square. |
+| ![Figure 3.2](pics/empty_world/gui_nonose_example.png)|
+| Figura 3.2: Um mapa vazio com o gui_grid habilitad. Com o gui_grid disabilitado este seria apenas um quadrado branco vazio.|
 	
-To make use of the `map.inc` file we put the following code into our world file:
+Para usarmos o arquivo map.inc colocamos o seguinte código em nosso arquivo .world:
 ```
 include "map.inc"
 ```
-This inserts the `map.inc` file into our world file where the include line is. This assumes that your worldfile and `map.inc` file are in the same folder, if they are not then you'll need to include the filepath in the quotes. Once this is done we can modify our definition of the map model to be used in the simulation. For example:
+Isso insere o arquivo `map.inc` dentro do arquivo .world no qual está a linha include. Isso assumindo que o arquivo .world e o arquivo `map.inc` estão na mesma pasta, se eles não estiverem você precisará incluir o caminho. Uma vez que isso estiver feito, podemos modificar nossa definição do modelo do mapa a ser usado na simulação. Por exemplo:
 ```
 floorplan
 (
@@ -147,104 +82,56 @@ floorplan
 )
 ```
 
-What this means is that we are using the model "floorplan", and making some
-extra definitions; both "bitmap" and "size" are parameters of a
-Player/Stage model. Here we are telling Player/Stage that we defined a
-bunch of parameters for a type of model called "floorplan" (contained in
-map.inc) and now we're using this "floorplan" model definition and adding a
-few extra parameters.
+Aqui estamos utilizando o modelo “floorplan” e fazendo algumas definições extras; tanto “bitmap” quanto “size” são parâmetros de um modelo do Player/Stage. Também estamos dizendo ao Player/Stage que definimos parâmetros para um modelo chamado “floorplan” (contido em `map.inc`) e agora estamos usando essas definições desse modelo “floorplan” e adicionando alguns parâmetros extras. 
 
-* `bitmap`: this is the filepath to a bitmap, which can be type bmp, jpeg,
-  gif or png. Black areas in the bitmap tell the model what shape to be,
-  non-black areas are not rendered, this is illustrated in Figure 3.4. In the
-  map.inc file
-  we told the map that its "color" would be grey. This parameter does not
-  affect how the bitmaps are read, Player/Stage will always look for black
-  in the bitmap, the `color` parameter just alters what colour the map is
-  rendered in the simulation.  
-* `size`: This is the size *in metres* of the
-  simulation. All sizes you give in the world file are in metres, and they
-  represent the actual size of things. If you have 3m x 4m robot testing
-  arena that is 2m high and you want to simulate it then the `size` is \[3 4
-  2\]. The first number is the size in the *x* dimension, the second is the
-  *y* dimension and the third is the *z* dimension.
+* `bitmap`: esse é o caminho para um bitmap, que pode ser do tipo bmp, jpeg, gif ou png. Áreas     pretas no bitmap dizem ao modelo que forma ele deve ter, áreas que não são pretas não são        renderizadas. No arquivo map.inc nós dissemos ao mapa que sua “cor” seria cinza. Esse            parâmetro não afeta em como os bitmaps são lidos, o Player/Stage sempre vai procurar pela cor    preta no bitmap, o parâmetro `color` só altera a cor que o mapa é renderizado na simulação. 
+* `size`: esse é o tamanho do mundo virtual em metros. Todos os tamanhos que você coloca no        arquivo .world são em metros, e eles representam o tamanho real das coisas. Se você tem um       robô de 3m x 4m que está sendo testado em uma arena de 2m de altura e você quer simular isso     então o `size` é [3 4 2]. O primeiro número é o tamanho na dimensão x, o segundo na dimensão y   e   o terceiro é a dimensão z. O exemplo  bitmap "bitmaps/cave.png"  size [15 15 0.5] fará com   que   o mundo seja no formato de um quadrado com tamanho de lado 15m e altura dos objetos 0.5m,  mesmo que originalmente tenha sido criado no formato de um retângulo. Desta forma o que define   o tamanho do mundo virtual são os parâmetros do size e não as dimensões de criação do arquivo    no editor gráfico.
 
-<!--- Figure --->
-| | |
-| ---------------| ------ |
-| ![Figure 3.4a](pics/empty_world/writing.png) | ![Figure 3.4b](pics/empty_world/helloworld.png) |
-
-Figure 3.4: The first image is our "helloworld.png" bitmap, the second image is
-what Player/Stage interprets that bitmap as. The coloured areas are walls,
-the robot can move everywhere else.
 		
-A full list of model parameters and their descriptions can be found in the
+A lista completa de parâmetros de modelos e suas descrições podem ser encontradas em
 [official Stage manual](http://rtv.github.com/Stage/group__model.html)
-Most of the useful parameters have already been described here, however
-there are a few other types of model which are relevant to building
-simulations of robots, these will be described later in 
-[Section 3.2 - Building a Robot](#32-building-a-robot).
+A maioria dos parâmetros usados já foram descritos aqui, entretanto há alguns outros tipos de modelos que são relevantes na construção de simulação de robôs, e serão descritas em seguida em 
+[Seção 3.2 - Building a Robot](#32-building-a-robot).
 
-### 3.1.2 - Describing the Player/Stage Window 
+### 3.1.2 - Descrevendo janelas no Player/Stage
 
-The worldfile also can be used to describe the simulation window that
-Player/Stage creates. Player/Stage will automatically make a window for the
-simulation if you don't put any window details in the worldfile, however,
-it is often useful to put this information in anyway. This prevents a large
-simulation from being too big for the window, or to increase or decrease
-the size of the simulation.
+O arquivo .world também pode ser utilizado para descrever as janelas de simulação que o Player/Stage cria. O Player/Stage vai criar automaticamente uma janela de simulação se você não colocar detalhes de janela no arquivo .world, entretanto, é comumente útil colocar essas informações mesmo assim. Isso previne que uma simulação seja grande demais para a janela, ou para aumentar e diminuir o tamanho da simulação.
 
-Like a model, a window is an inbuilt, high-level entity with lots of
-parameters. Unlike models though, there can be only one window in a
-simulation and only a few of its parameters are really needed. The
-simulation window is described with the following syntax: 
+Assim como o modelo, a janela possui muitos parâmetros. Mas, diferente do modelo, só pode haver uma janela numa simulação e apenas alguns parâmetros são realmente necessários. A janela de simulação é descrita com a seguinte sintaxe:
+
 ```
 window
 (
-   # parameters...
+   # parâmetros...
 )
 ```
 
-The two most important parameters for the window are `size` and `scale`.
+Os dois parâmetros mais importantes para a janela são tamanho(`size`) e escala(`scale`):
+* `size`: este é o tamanho que a janela de simulação terá em pixels. Você precisa definir a         largura (x) e a altura (y) da janela usando a seguinte sintaxe: `size [width height]`
+* `scale`: isso é quantos metros do ambiente simulado cada pixel mostra. Quanto maior é o número,   menor a simulação se torna.
 
-* `size`: This is the size the simulation window will be *in pixels*. You
-  need to define both the width and height of the window using the
-  following syntax: `size [width height]`.  
-* `scale`: This is how many
-  metres of the simulated environment each pixel shows. The bigger this
-  number is, the smaller the simulation becomes. The optimum value for the
-  scale is window_size/floorplan_size and it should be rounded
-  downwards so the simulation is a little smaller than the window it's in,
-  some degree of trial and error is needed to get this right. 
-
-A full list of window parameters can be found in [the Stage manual under
+A lista completa de parâmetros de janelas pode ser encontrada em [the Stage manual under
 "WorldGUI"](http://rtv.github.com/Stage/group__worldgui.html)
 
 ### 3.1.3 - Making a Basic Worldfile
 
-We have already discussed the basics of worldfile building: models and the
-window. There are just a few more parameters to describe which don't belong
-in either a model or a window description, these are optional though, and
-the defaults are pretty sensible.
+Já discutimos o básico do arquivo .world: os modelos e a janela. Finalmente podemos criar um arquivo .world.
 
-* `interval_sim`: This is how many simulated milliseconds there are between each update of the simulation window, the default is 100 milliseconds.
-* `interval_real`: This is how many real milliseconds there are between each update of the simulation window. Balancing this parameter and the `interval_sim` parameter controls the speed of the simulation. Again, the default value is 100 milliseconds, both these interval parameter defaults are fairly sensible, so it's not always necessary to redefine them.
+O manual do Stage contém [uma lista de parâmetros de alto nível para o arquivo world](http://rtv.github.com/Stage/group__world.html)
 
-The Stage manual contains [a list of the high-level worldfile
-parameters](http://rtv.github.com/Stage/group__world.html)
+Abra uma nova página em branco no seu editor de texto e crie o arquivo empty.world:
 
-Finally, we are able to write a worldfile!
 ```
 include "map.inc"
 
-# configure the GUI window
+# configura a janela GUI
 window
 ( 
    size [700.000 700.000] 
    scale 41
 )
 
-# load an environment bitmap
+# carrega um ambiente bitmap
 floorplan
 (
    bitmap "bitmaps/cave.png" 
@@ -252,10 +139,12 @@ floorplan
 )
 ```
 
-If we save the above code as empty.world (correcting any filepaths if
-necessary) we can run its corresponding empty.cfg file (see 
-[Section 3.1 - Empty World](#31-building-an-empty-world)) to get the simulation shown
-in Figure 3.5.
+Podemos agora executar nossa simulação da seguinte maneira:
+
+`> cd <source_code>/worlds`
+`> player empty.cfg &`
+
+Executando o arquivo empty.cfg você deverá ver a seguinte simulação:
 
 <!--- Figure --->
 | |
@@ -263,6 +152,10 @@ in Figure 3.5.
 | ![Figure 3.5](pics/empty_world/finalEmptyWorld.png) |
 | Figure 3.5: Our Empty World | 
 	
+
+Para modificar o cenário da sua simulação, basta criar um desenho na cor preta em um editor de imagem de sua preferência(GIMP é um bom editor de imagem para começar caso você não tenha um preferido) e salvar seu arquivo em um dos formatos especificados. Depois é só colocar o nome do arquivo no parâmetro `bitmap` dentro do seu arquivo .world. De preferência, salve seu desenho dentro da pasta bitmaps. Caso você prefira salvar em outra pasta, você terá que atualizar também o caminho até a imagem. É importante destacar que o Stage redimensionará a imagem de acordo com o cenário desenhado, mantendo o desenho sempre junto às bordas. Se você deseja criar uma distância entre as bordas e o desenho, deve desenhar essa borda (ou mudar a quantidade de pixels da imagem), assim quando o Stage redimensionar a imagem, manterá sua borda como limite do cenário.
+
+
 ## 3.2 - Building a Robot
 
 In Player/Stage a robot is just a slightly advanced kind of model, all the
