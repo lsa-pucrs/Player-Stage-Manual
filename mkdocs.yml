@@ -5,7 +5,7 @@ pages:
 - Home : index.md
 - 'Ch1 - Introducao': 'INTRO.md'
 - 'Ch2 - O Basico': 'BASICS.md'
-- 'Ch3 - Building a World': 'WORLDFILES.md'
+- 'Cap3 - Construindo um mundo': 'WORLDFILES.rst'
 - 'Ch4 - Writing a Configuration (.cfg) File': 'CFGFILES.md'
 - 'Ch5 - Getting Your Simulation to Run your code': 'CONTROLLERS.md'
 - 'Ch6 - Controllers (C++)': 'CONTROLLER_CPP.md'
