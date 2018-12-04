@@ -1,10 +1,10 @@
 
 ==========================
-Donnie Assistive Robot: User Manual
+Player/Stage: User Manual
 ==========================
 
 
-About Donnie
+About Player/Stage
 -----------------
 
 .. image:: ./source/getting_started/images/donnie-robot.png
@@ -40,7 +40,17 @@ The project is in its second version, developed in the Laboratório de Sistemas 
    :maxdepth: 2
    
    docs/index
-   
+   docs/INTRO
+   docs/BASICS
+   docs/WORLDFILES
+   docs/CFGFILES
+   docs/CONTROLLERS
+   docs/CONTROLLER_CPP
+   docs/CONTROLLER_C
+   docs/CONTROLLER_PYCPP
+   docs/CONTROLLER_PYC
+   docs/INTERFACES
+   docs/DRIVERS
 
 
 Papers
