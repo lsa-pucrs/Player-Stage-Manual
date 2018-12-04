@@ -51,17 +51,17 @@ outdated. Other versions of this manual are available at
 TABLE OF CONTENTS
 =================
 
-1.  `Introduction <INTRO.md>`__
-2.  `The Basics <BASICS.md>`__
-3.  `Building a World <WORLDFILES.md>`__
-4.  `Writing a Configuration (.cfg) File <CFGFILES.md>`__
-5.  `Getting Your Simulation to Run Your Code <CONTROLLERS.md>`__
-6.  `Controllers (C++) <CONTROLLER_CPP.md>`__
-7.  `Controllers (C) <CONTROLLER_C.md>`__
-8.  `Controllers (Py-libplayercpp) <CONTROLLER_PYCPP.md>`__
-9.  `Controllers (Py-libplayerc) <CONTROLLER_PYC.md>`__
-10. `Building a New Interface (C/C++) <INTERFACES.md>`__
-11. `Building a New Driver (C/C++) <DRIVERS.md>`__
+1.  `Introduction <INTRO.rst>`__
+2.  `The Basics <BASICS.rst>`__
+3.  `Building a World <WORLDFILES.rst>`__
+4.  `Writing a Configuration (.cfg) File <CFGFILES.rst>`__
+5.  `Getting Your Simulation to Run Your Code <CONTROLLERS.rst>`__
+6.  `Controllers (C++) <CONTROLLER_CPP.rst>`__
+7.  `Controllers (C) <CONTROLLER_C.rst>`__
+8.  `Controllers (Py-libplayercpp) <CONTROLLER_PYCPP.rst>`__
+9.  `Controllers (Py-libplayerc) <CONTROLLER_PYC.rst>`__
+10. `Building a New Interface (C/C++) <INTERFACES.rst>`__
+11. `Building a New Driver (C/C++) <DRIVERS.rst>`__
 
 Change Log
 ----------

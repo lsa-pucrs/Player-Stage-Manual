@@ -39,12 +39,8 @@ The project is in its second version, developed in the Laboratório de Sistemas 
 .. toctree::
    :maxdepth: 2
    
-   docs/getting_started/index
-   docs/godonnie/index
-   docs/simulation/index
-   docs/robot/index   
-   docs/belt/index
-   docs/contributors/index
+   docs/index
+   
 
 
 Papers

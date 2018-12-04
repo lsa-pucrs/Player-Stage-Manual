@@ -1,2 +1,2 @@
-# donnie-user-manual
-Donnie User Manual
+# player-stage-manual
+Player Stage Manual
